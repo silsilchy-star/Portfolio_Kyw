@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="format-detection" content="telephone=no">
+<meta name="theme-color" content="#ffffff">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="description" content="게임 기획자 지망생 김영웅의 포트폴리오. 심비온 프로젝트 PM 경험과 프로젝트·기술·문서를 소개합니다.">
+<title>김영웅 — Portfolio</title>
+<!-- 한글 웹폰트 : Pretendard Variable (SIL OFL, 상업적 이용 가능) -->
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">본문으로 건너뛰기</a>
+
+<!-- ============================================================
+     상단 헤더 : 로고 + 대분류 탭(SPA 뷰 전환) + 유틸
+     ============================================================ -->
+<header class="topbar" id="topbar">
+  <div class="topbar__inner">
+
+    <a class="brand" href="#intro" data-tab-link="intro">
+      <span class="brand__mark" aria-hidden="true"></span>
+      <span class="brand__text">김영웅<span class="brand__dot">.</span></span>
+    </a>
+
+    <nav class="tabs" id="tabs" aria-label="주요 섹션">
+      <ul class="tabs__list" role="tablist">
+        <li><button class="tab is-active" role="tab" data-tab="intro"    aria-selected="true"  aria-controls="intro">소개</button></li>
+        <li><button class="tab"           role="tab" data-tab="resume"   aria-selected="false" aria-controls="resume">이력서</button></li>
+        <li><button class="tab"           role="tab" data-tab="projects" aria-selected="false" aria-controls="projects">프로젝트</button></li>
+        <li><button class="tab"           role="tab" data-tab="skills"   aria-selected="false" aria-controls="skills">기술</button></li>
+        <li><button class="tab"           role="tab" data-tab="docs"     aria-selected="false" aria-controls="docs">문서</button></li>
+        <li><button class="tab"           role="tab" data-tab="games"    aria-selected="false" aria-controls="games">게임</button></li>
+      </ul>
+    </nav>
+
+    <div class="topbar__actions">
+      <button class="btn btn--ghost" type="button" id="btn-sidebar-toggle" aria-label="목차 열기" aria-expanded="false">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 4h12M2 8h12M2 12h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+      <button class="btn btn--outline" type="button" id="btn-theme-panel" aria-controls="theme-panel" aria-expanded="false">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="5.25" stroke="currentColor" stroke-width="1.5"/><path d="M8 2.75v10.5" stroke="currentColor" stroke-width="1.5"/></svg>
+        <span>테마</span>
+      </button>
+      <a class="btn btn--filled" href="#resume" data-tab-link="resume">이력서</a>
+    </div>
+
+  </div>
+  <div class="topbar__progress" id="scroll-progress" aria-hidden="true"><i></i></div>
+</header>
+
+<!-- ============================================================
+     본문 : 좌측 사이드 내비(앵커) + 뷰 영역
+     ============================================================ -->
+<div class="shell">
+
+  <!-- 좌측 고정 사이드 내비 : 활성 탭의 소제목 앵커가 JS로 채워짐 -->
+  <aside class="sidebar" id="sidebar" aria-label="섹션 목차">
+    <div class="sidebar__inner">
+      <p class="sidebar__label">목차</p>
+      <nav class="sidenav" id="sidenav"><!-- app.js 가 채웁니다 --></nav>
+      <div class="sidebar__foot">
+        <p class="muted caption"><a href="mailto:silsilkyw@naver.com">silsilkyw@naver.com</a> · 010-9139-3106</p>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-scrim" id="sidebar-scrim" hidden></div>
+
+  <main class="main" id="main">
+
+    <!-- ========================================================
+         1. 소개
+         ======================================================== -->
+    <section class="view is-active" id="intro" data-view="intro" role="tabpanel" aria-labelledby="tab-intro">
+
+      <!-- 히어로 -->
+      <div class="hero" data-anchor="intro-hero" data-anchor-label="히어로">
+        <div class="pill-row" data-reveal>
+          <span class="pill" data-accent="tangerine"><i class="pill__dot"></i>게임 기획 · PM</span>
+          <span class="pill" data-accent="lavender"><i class="pill__dot"></i>일정 관리</span>
+          <span class="pill" data-accent="green"><i class="pill__dot"></i>소통과 협업</span>
+        </div>
+
+        <h1 class="display" data-reveal>
+          경청으로 팀을 움직이고,<br>목계로 끝까지 완성합니다
+        </h1>
+
+        <p class="hero__sub" data-reveal>
+          게임 기획자를 지망하는 김영웅입니다. 5인 팀 프로젝트 &lsquo;심비온&rsquo;에서 PM으로
+          일정 관리와 출시를 맡아 실제 서비스까지 완주했습니다. 이 페이지에서 프로젝트·기술·문서와
+          이력서를 볼 수 있습니다.
+        </p>
+
+        <div class="hero__actions" data-reveal>
+          <a class="btn btn--filled btn--lg" href="#projects" data-tab-link="projects">프로젝트 보기</a>
+          <a class="btn btn--outline btn--lg" href="#docs" data-tab-link="docs">포트폴리오 문서</a>
+        </div>
+
+        <div class="hero__mock" aria-label="대표 이미지 자리" data-reveal>
+          <div class="slot slot--wide"><span>TODO: 대표 이미지 / 제품 목업</span></div>
+        </div>
+      </div>
+
+
+      <!-- 궤도 맵 : 5개 목차를 공전 노드로 (다크 풀블리드 밴드) -->
+      <div class="section orbital-wrap" data-reveal data-anchor="intro-orbit" data-anchor-label="궤도 맵">
+        <div class="orbital" id="orbital">
+          <div class="orbital__head">
+            <p class="orbital__eyebrow">SITE MAP</p>
+            <h2 class="orbital__title">이 포트폴리오의 구조</h2>
+            <p class="orbital__desc">노드를 누르면 상세가 열리고, 연결된 항목이 함께 빛납니다.</p>
+          </div>
+
+          <div class="orbit" id="orbit">
+            <div class="orbit__core" aria-hidden="true">
+              <span class="orbit__ping"></span>
+              <span class="orbit__ping orbit__ping--2"></span>
+              <span class="orbit__coredot"></span>
+            </div>
+            <div class="orbit__ring" aria-hidden="true"></div>
+            <div class="orbit__nodes" id="orbit-nodes" role="group" aria-label="포트폴리오 섹션 노드"></div>
+          </div>
+
+          <div class="orbit__panel" id="orbit-panel" hidden></div>
+
+          <p class="orbital__hint">빈 공간을 누르면 닫힙니다 · 자동 회전</p>
+        </div>
+      </div>
+
+      <!-- 자기소개 본문 : 목차와 1:1 대응하는 4개 블록 -->
+      <div class="section" data-reveal data-anchor="intro-about" data-anchor-label="자기소개">
+        <h2 class="h-sm">자기소개</h2>
+        <div class="prose">
+          <p>짧지만 다사다난한 경험이 많은 편입니다. 카페와 물류 현장에서 일해봤고, 군 복무를 병장으로 마쳤으며,
+          이후 게임 기획을 배우며 세 번의 팀 프로젝트를 거쳤습니다. 그때그때 다른 사람과 다른 문제를 마주하면서도
+          끝까지 듣고 끝까지 완성하는 태도, &lsquo;경청&rsquo;과 &lsquo;목계&rsquo;를 스스로의 기준으로 삼게 됐습니다.</p>
+          <p>개인의 성과보다 팀이 만든 결과물을 더 중요하게 봅니다. 5인 팀 프로젝트 &lsquo;심비온&rsquo;에서는 PM을 맡아
+          일정 관리와 업무 분배, 데이터 테이블·TC 작성, itch.io 출시 준비까지 진행했습니다. 게임 개발 경험이
+          많지 않은 상태에서 시작했지만, 모르는 것은 묻고 팀원의 의견을 계속 확인하며 일정을 조정해 실제 출시까지
+          완주했습니다.</p>
+          <p>지금은 디벨로켓 에듀에서 AI 데이터 분석 기반 게임콘텐츠 제작 과정을 밟으며 기획 역량을 넓히고 있습니다.
+          소통과 사회성을 강점으로, 여러 직무 사이에서 정보를 정확히 옮기고 조율하는 기획자가 되려 합니다.</p>
+        </div>
+      </div>
+
+      <div class="section" data-reveal data-anchor="intro-summary" data-anchor-label="페이지 안내">
+        <h2 class="h-sm">이 포트폴리오의 페이지</h2>
+        <p class="intro-blocks__lead muted">각 카드를 누르면 해당 페이지로 이동합니다.</p>
+        <div class="intro-blocks">
+
+          <a class="intro-block intro-block--wide" data-reveal data-accent="sapphire" data-tab-link="resume" href="#resume">
+            <span class="intro-block__tag">이력서</span>
+            <h3 class="h-xs">기획자가 되려는 이유와 강점</h3>
+            <p class="muted">강점과 경험, 문제 해결 과정과 앞으로의 목표를 정리했습니다.</p>
+            <span class="intro-block__go" aria-hidden="true">페이지 열기 →</span>
+          </a>
+
+          <a class="intro-block" data-reveal data-accent="tangerine" data-tab-link="projects" href="#projects">
+            <span class="intro-block__tag">프로젝트</span>
+            <h3 class="h-xs">함께 만들고 출시까지 간 팀 프로젝트 3건</h3>
+            <p class="muted">헬 브레이커 · 체크매터 · 심비온의 역할과 결과를 담았습니다.</p>
+            <span class="intro-block__go" aria-hidden="true">페이지 열기 →</span>
+          </a>
+
+          <a class="intro-block" data-reveal data-accent="lavender" data-tab-link="skills" href="#skills">
+            <span class="intro-block__tag">기술</span>
+            <h3 class="h-xs">다룰 수 있는 도구와 실제 써본 경험</h3>
+            <p class="muted">Unity · Figma · Github · AI 등, 어디에 어떻게 썼는지까지 적었습니다.</p>
+            <span class="intro-block__go" aria-hidden="true">페이지 열기 →</span>
+          </a>
+
+          <a class="intro-block" data-reveal data-accent="blue" data-tab-link="docs" href="#docs">
+            <span class="intro-block__tag">문서</span>
+            <h3 class="h-xs">심비온 프로젝트의 실제 산출물</h3>
+            <p class="muted">WBS · TC · 데이터 테이블 등 프로젝트 문서를 서류철에서 열람할 수 있습니다.</p>
+            <span class="intro-block__go" aria-hidden="true">페이지 열기 →</span>
+          </a>
+
+          <a class="intro-block" data-reveal data-accent="green" data-tab-link="games" href="#games">
+            <span class="intro-block__tag">게임</span>
+            <h3 class="h-xs">TODO: 플레이한 게임과 장르 취향</h3>
+            <p class="muted">TODO: 좋아하는 게임과 그 이유를 채우면 취향이 레퍼런스가 됩니다.</p>
+            <span class="intro-block__go" aria-hidden="true">페이지 열기 →</span>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- 이력 -->
+      <div class="section" data-reveal data-anchor="intro-career" data-anchor-label="이력">
+        <h2 class="h-sm">이력</h2>
+        <ol class="timeline">
+          <li class="timeline__item" data-reveal>
+            <span class="timeline__period mono">2026.05 – 현재</span>
+            <div>
+              <h3 class="h-xs">디벨로켓 에듀 / 교육생</h3>
+              <p class="muted">(기업맞춤형) AI 데이터 분석 기반 게임콘텐츠 제작자 양성 과정. 헬 브레이커 · 체크매터 · 심비온 3개 팀 프로젝트를 진행했습니다.</p>
+            </div>
+          </li>
+          <li class="timeline__item" data-reveal>
+            <span class="timeline__period mono">2022 – 2024</span>
+            <div>
+              <h3 class="h-xs">대한민국 육군 / 병장 전역</h3>
+              <p class="muted">TODO: 담당 업무와 배운 점을 2~3줄로 (부대·주요 업무 등).</p>
+            </div>
+          </li>
+          <li class="timeline__item" data-reveal>
+            <span class="timeline__period mono">2018 – 2021</span>
+            <div>
+              <h3 class="h-xs">남한고등학교 / 인문계열</h3>
+              <p class="muted">TODO: 고교 시절 활동 중 기획자 지망과 연결되는 내용이 있다면 1~2줄.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+
+    </section>
+
+    <!-- ========================================================
+         2. 프로젝트
+         ======================================================== -->
+    <section class="view" id="projects" data-view="projects" role="tabpanel" hidden>
+
+      <div class="view-head" data-reveal data-anchor="projects-head" data-anchor-label="개요">
+        <h1 class="h-lg">프로젝트</h1>
+        <p class="view-head__sub muted">디벨로켓 에듀 과정에서 진행한 3개 팀 프로젝트입니다.</p>
+      </div>
+
+      <div class="section" data-reveal data-anchor="project-1" data-anchor-label="심비온">
+        <article class="project-card">
+          <div class="project-card__media">
+            <!-- iOS 자동재생 필수 속성: playsinline muted autoplay loop -->
+            <video class="project-card__video" playsinline muted autoplay loop preload="none" poster=""></video>
+            <div class="slot slot--media"><span>TODO: 심비온 배경 비디오(.mp4) 또는 이미지</span></div>
+          </div>
+          <div class="project-card__body">
+            <div class="project-card__meta">
+              <span class="tag" data-accent="tangerine">TODO 장르</span>
+              <span class="tag">PM</span>
+              <span class="tag mono">2026</span>
+            </div>
+            <h2 class="h-sm">심비온</h2>
+            <p class="muted">5인 팀으로 유니티6 엔진을 사용해 게임을 개발하고 itch.io에 출시까지 진행한 프로젝트입니다.
+            PM으로서 일정 관리(마일스톤·WBS)와 업무 분배, 데이터 테이블·TC 작성, 출시 준비와 사후 관리(개발로그, 홍보용 X 페이지 운영)를 맡았습니다.</p>
+
+            <dl class="metric-row">
+              <div class="metric"><dt>플레이</dt><dd class="metric__value">100+</dd></div>
+              <div class="metric"><dt>조회수</dt><dd class="metric__value">300+</dd></div>
+              <div class="metric"><dt>프로젝트 기간</dt><dd class="metric__value">46일</dd></div>
+              <div class="metric"><dt>팀 인원</dt><dd class="metric__value">5명</dd></div>
+            </dl>
+
+            <div class="project-card__links">
+              <a class="btn btn--outline" href="#" target="_blank" rel="noopener">출시 링크 (TODO: itch.io URL)</a>
+              <a class="btn btn--ghost" href="#docs" data-tab-link="docs">상세 문서</a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="section" data-reveal data-anchor="project-2" data-anchor-label="체크매터">
+        <article class="project-card">
+          <div class="project-card__media">
+            <div class="slot slot--media"><span>TODO: 체크매터 배경 비디오 또는 이미지</span></div>
+          </div>
+          <div class="project-card__body">
+            <div class="project-card__meta">
+              <span class="tag" data-accent="lavender">TODO 장르</span>
+              <span class="tag">UI / UX</span>
+              <span class="tag mono">2026</span>
+            </div>
+            <h2 class="h-sm">체크매터</h2>
+            <p class="muted">TODO: 프로젝트 설명 3~5줄. 무엇을 만들었고, UI/UX로 어떤 문제를 풀었는지 (기간 07.09~07.19, 약 11일).</p>
+            <dl class="metric-row">
+              <div class="metric"><dt>TODO 지표</dt><dd class="metric__value">000</dd></div>
+              <div class="metric"><dt>TODO 지표</dt><dd class="metric__value">00%</dd></div>
+              <div class="metric"><dt>프로젝트 기간</dt><dd class="metric__value">11일</dd></div>
+            </dl>
+            <div class="project-card__links">
+              <a class="btn btn--outline" href="#" target="_blank" rel="noopener">출시 링크</a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="section" data-reveal data-anchor="project-3" data-anchor-label="헬 브레이커">
+        <article class="project-card">
+          <div class="project-card__media">
+            <div class="slot slot--media"><span>TODO: 헬 브레이커 배경 비디오 또는 이미지</span></div>
+          </div>
+          <div class="project-card__body">
+            <div class="project-card__meta">
+              <span class="tag" data-accent="green">TODO 장르</span>
+              <span class="tag">업무 분배</span>
+              <span class="tag mono">2026</span>
+            </div>
+            <h2 class="h-sm">헬 브레이커</h2>
+            <p class="muted">TODO: 프로젝트 설명. 어떤 게임이었고 업무 분배에서 무엇을 했는지 (기간 06.05~06.15, 약 11일).</p>
+            <dl class="metric-row">
+              <div class="metric"><dt>TODO 지표</dt><dd class="metric__value">000</dd></div>
+              <div class="metric"><dt>프로젝트 기간</dt><dd class="metric__value">11일</dd></div>
+            </dl>
+            <div class="project-card__links">
+              <a class="btn btn--outline" href="#" target="_blank" rel="noopener">출시 링크</a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+    </section>
+
+    <!-- ========================================================
+         3. 기술
+         ======================================================== -->
+    <section class="view" id="skills" data-view="skills" role="tabpanel" hidden>
+
+      <div class="view-head" data-reveal data-anchor="skills-head" data-anchor-label="개요">
+        <h1 class="h-lg">기술</h1>
+        <p class="view-head__sub muted">도구별로 &lsquo;무엇을 할 수 있는가 / 어디에 써봤는가&rsquo;를 적었습니다.</p>
+      </div>
+
+      <div class="section" data-reveal data-anchor="skills-engine" data-anchor-label="엔진 · 개발">
+        <h2 class="h-sm">엔진 · 개발</h2>
+        <ul class="skill-list">
+          <li class="skill-row" data-reveal>
+            <span class="skill-row__icon" aria-hidden="true"><span class="slot slot--icon">IC</span></span>
+            <div class="skill-row__name"><strong>Unity</strong><span class="caption muted">프로젝트 활용</span></div>
+            <div class="skill-row__desc muted">유니티6 엔진으로 심비온 프로젝트를 제작해 itch.io 출시까지 진행했습니다.</div>
+          </li>
+          <li class="skill-row" data-reveal>
+            <span class="skill-row__icon" aria-hidden="true"><span class="slot slot--icon">IC</span></span>
+            <div class="skill-row__name"><strong>TODO: 도구명</strong><span class="caption muted">TODO: 숙련도</span></div>
+            <div class="skill-row__desc muted">TODO: 설명.</div>
+          </li>
+          <li class="skill-row" data-reveal>
+            <span class="skill-row__icon" aria-hidden="true"><span class="slot slot--icon">IC</span></span>
+            <div class="skill-row__name"><strong>TODO: 도구명</strong><span class="caption muted">TODO: 숙련도</span></div>
+            <div class="skill-row__desc muted">TODO: 설명.</div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="section" data-reveal data-anchor="skills-plan" data-anchor-label="기획 · 문서">
+        <h2 class="h-sm">기획 · 문서</h2>
+        <ul class="skill-list">
+          <li class="skill-row" data-reveal>
+            <span class="skill-row__icon" aria-hidden="true"><span class="slot slot--icon">IC</span></span>
+            <div class="skill-row__name"><strong>Figma</strong><span class="caption muted">프로젝트 활용</span></div>
+            <div class="skill-row__desc muted">체크매터 프로젝트에서 UI/UX 설계에 활용했습니다.</div>
+          </li>
+          <li class="skill-row" data-reveal>
+            <span class="skill-row__icon" aria-hidden="true"><span class="slot slot--icon">IC</span></span>
+            <div class="skill-row__name"><strong>MS Office</strong><span class="caption muted">프로젝트 활용</span></div>
+            <div class="skill-row__desc muted">심비온 프로젝트의 일정 관리, 데이터 테이블, TC(테스트 케이스) 등 개발 문서 작성에 활용했습니다.</div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="section" data-reveal data-anchor="skills-data" data-anchor-label="데이터 · 협업">
+        <h2 class="h-sm">데이터 · 협업</h2>
+        <ul class="skill-list">
+          <li class="skill-row" data-reveal>
+            <span class="skill-row__icon" aria-hidden="true"><span class="slot slot--icon">IC</span></span>
+            <div class="skill-row__name"><strong>AI</strong><span class="caption muted">디벨로켓 에듀 과정 중</span></div>
+            <div class="skill-row__desc muted">AI 데이터 분석 기반 게임콘텐츠 제작 과정에서 기획 리서치와 문서 작업 보조에 활용하고 있습니다.</div>
+          </li>
+          <li class="skill-row" data-reveal>
+            <span class="skill-row__icon" aria-hidden="true"><span class="slot slot--icon">IC</span></span>
+            <div class="skill-row__name"><strong>Github</strong><span class="caption muted">TODO: 숙련도</span></div>
+            <div class="skill-row__desc muted">TODO: 팀 프로젝트에서 구체적으로 어떻게 활용했는지.</div>
+          </li>
+        </ul>
+      </div>
+
+    </section>
+
+    <!-- ========================================================
+         4. 문서
+         ======================================================== -->
+    <section class="view" id="docs" data-view="docs" role="tabpanel" hidden>
+
+      <div class="view-head" data-reveal data-anchor="docs-head" data-anchor-label="개요">
+        <h1 class="h-lg">문서</h1>
+        <p class="view-head__sub muted">
+          심비온 프로젝트에서 작성한 WBS · TC · 데이터 테이블 등의 문서를 서류철에서 꺼내 열람합니다.
+        </p>
+      </div>
+
+      <div class="section" data-reveal data-anchor="docs-archive" data-anchor-label="서류철">
+        <div class="filedeck" id="filedeck">
+          <div class="filedeck__head">
+            <p class="filedeck__eyebrow">ARCHIVE</p>
+            <h2 class="filedeck__title">문서 서류철</h2>
+            <p class="filedeck__desc">폴더를 누르면 위쪽 서류가 밀려나고 그 문서가 열립니다.</p>
+          </div>
+
+          <div class="fd-stage" id="fd-stage">
+            <div class="fd-viewer-wrap" id="fd-viewer-wrap">
+              <div class="fd-viewer-inner">
+                <article class="fd-viewer" id="fd-viewer"></article>
+              </div>
+            </div>
+
+            <div class="fd-stack" id="fd-stack">
+              <div class="fd-base" id="fd-base"><span class="mono"></span></div>
+            </div>
+          </div>
+
+          <p class="filedeck__hint mono">CLICK A FOLDER · ESC TO CLOSE · ↑ ↓ TO BROWSE</p>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ========================================================
+         5. 게임
+         ======================================================== -->
+    <section class="view" id="games" data-view="games" role="tabpanel" hidden>
+
+      <div class="view-head" data-reveal data-anchor="games-head" data-anchor-label="개요">
+        <h1 class="h-lg">게임</h1>
+        <p class="view-head__sub muted">TODO: 플레이한 게임 기록과 장르 분포. (app.js의 GAMES 배열을 채우면 자동으로 채워집니다)</p>
+      </div>
+
+      <!-- 장르 비율 그래프 -->
+      <div class="section" data-reveal data-anchor="games-chart" data-anchor-label="장르 분포">
+        <h2 class="h-sm">장르 분포</h2>
+        <div class="card genre-panel">
+          <div class="genre-bar" id="genre-bar" role="img" aria-label="장르 비율 그래프"></div>
+          <ul class="genre-legend" id="genre-legend"></ul>
+          <p class="caption muted">등록된 게임의 장르를 합산해 자동 계산됩니다. 데이터는 <code class="mono">app.js</code> 상단 <code class="mono">GAMES</code> 배열에서 수정하세요.</p>
+        </div>
+      </div>
+
+      <!-- 게임 등록 폼 (골격) -->
+      <div class="section" data-reveal data-anchor="games-add" data-anchor-label="게임 등록">
+        <h2 class="h-sm">게임 등록</h2>
+        <form class="card game-form" id="game-form" autocomplete="off">
+          <div class="field">
+            <label for="g-title">제목</label>
+            <input type="text" id="g-title" name="title" placeholder="TODO: 게임 제목">
+          </div>
+          <div class="field">
+            <label for="g-platform">플랫폼</label>
+            <select id="g-platform" name="platform">
+              <option value="">선택</option>
+              <option>PC</option><option>PS5</option><option>Switch</option>
+              <option>Xbox</option><option>Mobile</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="g-genre">장르 <span class="caption muted">(쉼표로 구분)</span></label>
+            <input type="text" id="g-genre" name="genres" placeholder="RPG, 액션">
+          </div>
+          <div class="field">
+            <label for="g-image">이미지 URL</label>
+            <input type="url" id="g-image" name="image" placeholder="https://…">
+          </div>
+          <div class="field field--full">
+            <button class="btn btn--filled" type="submit">등록</button>
+            <span class="caption muted">※ 뼈대 단계 — 새로고침하면 초기화됩니다.</span>
+          </div>
+        </form>
+      </div>
+
+      <!-- 게임 카드 그리드 -->
+      <div class="section" data-reveal data-anchor="games-list" data-anchor-label="게임 목록">
+        <h2 class="h-sm">플레이 기록</h2>
+        <div class="game-grid" id="game-grid"><!-- app.js 가 채웁니다 --></div>
+      </div>
+
+    </section>
+
+
+    <!-- ========================================================
+         6. 이력서
+         ======================================================== -->
+    <section class="view" id="resume" data-view="resume" role="tabpanel" hidden>
+
+      <div class="view-head" data-reveal data-anchor="resume-head" data-anchor-label="개요">
+        <p class="eyebrow">RESUME</p>
+        <h1 class="h-lg">이력서</h1>
+        <p class="view-head__sub muted">경청으로 듣고 목계로 완성하는, 소통하는 게임 기획자가 되려 합니다.</p>
+        <div class="resume-actions">
+          <a class="btn btn--filled" href="#" target="_blank" rel="noopener">PDF 내려받기 (TODO: 파일 연결)</a>
+          <a class="btn btn--outline" href="#projects" data-tab-link="projects">프로젝트 보기</a>
+        </div>
+      </div>
+
+      <!-- 1. 계기 -->
+      <div class="section" data-reveal data-anchor="resume-why" data-anchor-label="1. 계기">
+        <div class="rsec-head">
+          <span class="rsec-num">01</span>
+          <h2 class="h-sm">기획자를 선택한 계기</h2>
+        </div>
+
+        <blockquote class="rquote" data-accent="blue">
+          <p>TODO: 기획자를 하겠다고 마음먹게 만든 한 문장. 짧고 구체적일수록 좋습니다.</p>
+        </blockquote>
+
+        <div class="rcols">
+          <div class="prose">
+            <p>TODO: 그 계기가 된 구체적인 순간. 언제, 어디서, 무엇을 하다가 그런 생각이 들었는지.</p>
+            <p>TODO: 그 뒤에 무엇을 해봤는지. 생각에 그치지 않았다는 증거.</p>
+          </div>
+          <div class="prose">
+            <p>TODO: 왜 다른 직무가 아니라 기획자인지. 비교해서 설명하면 설득력이 올라갑니다.</p>
+            <p>TODO: 지금도 그 동기가 유효한 이유.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. 강점 -->
+      <div class="section" data-reveal data-anchor="resume-strength" data-anchor-label="2. 강점">
+        <div class="rsec-head">
+          <span class="rsec-num">02</span>
+          <h2 class="h-sm">강점과 기획자의 연결</h2>
+        </div>
+        <p class="rsec-desc muted">강점 자체보다 <strong>그 강점이 기획 업무의 어느 지점에서 쓰이는지</strong>가 핵심입니다.</p>
+
+        <div class="strength-grid">
+          <article class="strength-card" data-accent="tangerine">
+            <span class="strength-card__no mono">S1</span>
+            <h3 class="h-xs">경청</h3>
+            <p class="strength-card__desc muted">심비온 프로젝트에서 팀원에게 남은 기한에 대한 의견을 지속적으로 물어, 일정을 재조정하고 후순위 콘텐츠를 덜어냈습니다.</p>
+            <div class="strength-card__link">
+              <span class="strength-card__label">기획자로서</span>
+              <p>이해관계자와 팀원의 요구를 정확히 듣고 기획에 반영하는 데 씁니다.</p>
+            </div>
+          </article>
+
+          <article class="strength-card" data-accent="lavender">
+            <span class="strength-card__no mono">S2</span>
+            <h3 class="h-xs">목계 — 흔들리지 않는 꾸준함</h3>
+            <p class="strength-card__desc muted">게임 개발 경험이 많지 않은 상태로 시작했지만, 모르는 것은 질문하며 WBS·TC·데이터 테이블 작성과 출시까지 완주했습니다.</p>
+            <div class="strength-card__link">
+              <span class="strength-card__label">기획자로서</span>
+              <p>일정이 흔들리는 상황에서도 침착하게 우선순위를 재조정하고 끝까지 완성합니다.</p>
+            </div>
+          </article>
+
+          <article class="strength-card" data-accent="green">
+            <span class="strength-card__no mono">S3</span>
+            <h3 class="h-xs">소통과 사회성</h3>
+            <p class="strength-card__desc muted">PD, 프로그래밍 강사, 개발 팀장 등 여러 직무의 사람에게 직접 질문하며 필요한 정보를 끌어냈습니다.</p>
+            <div class="strength-card__link">
+              <span class="strength-card__label">기획자로서</span>
+              <p>여러 직군 사이에서 정보를 정확히 옮기고 조율하는 역할을 맡습니다.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- 3. 경험 -->
+      <div class="section" data-reveal data-anchor="resume-case" data-anchor-label="3. 경험">
+        <div class="rsec-head">
+          <span class="rsec-num">03</span>
+          <h2 class="h-sm">경험 — 문제 해결 과정</h2>
+          <span class="framework-badge" id="framework-badge"></span>
+        </div>
+        <p class="rsec-desc muted">
+          두 케이스 모두 <strong>같은 전개 틀</strong>로 씁니다. 틀이 같아야 읽는 사람이 두 번째 케이스부터는
+          내용에만 집중할 수 있습니다. 틀은 <code class="mono">app.js</code>의
+          <code class="mono">RESUME_FRAMEWORK</code> 한 줄로 STAR ↔ 상행결배 전환됩니다.
+        </p>
+
+        <article class="case" data-case>
+          <header class="case__head">
+            <div>
+              <span class="tag" data-accent="blue">CASE 01</span>
+              <h3 class="h-xs case__title">심비온 — 팀 프로젝트 PM</h3>
+            </div>
+            <span class="case__period mono">2026.07.20 – 2026.09.03</span>
+          </header>
+
+          <ol class="steps">
+            <li class="step" data-step="situation">
+              <span class="step__no"></span>
+              <div class="step__body">
+                <h4 class="step__label"></h4>
+                <p>5인 팀으로 유니티6 엔진을 사용해 게임을 개발하고 itch.io에 출시하는 46일짜리 프로젝트였습니다.
+                저는 PM으로 일정 관리, 업무 분배, 개발 문서 작성, 출시 준비를 맡았습니다.
+                목표는 itch.io 조회수 1,000 또는 플레이 100 달성이었습니다.</p>
+              </div>
+            </li>
+            <li class="step" data-step="task">
+              <span class="step__no"></span>
+              <div class="step__body">
+                <h4 class="step__label"></h4>
+                <p>진짜 문제는 <strong>게임 개발 경험이 많지 않은 상태로 구체적인 일정을 산출해야 한다는 것</strong>이었습니다.
+                데이터 테이블은 왜, 어떻게 작성해야 하는지 몰랐고, TC는 기능을 얼마나 세부적으로 쪼개야 하는지,
+                구두로만 공유된 기획을 어떻게 문서에 반영해야 하는지도 불분명했습니다.</p>
+              </div>
+            </li>
+            <li class="step" data-step="action">
+              <span class="step__no"></span>
+              <div class="step__body">
+                <h4 class="step__label"></h4>
+                <p>먼저 프로젝트를 상상으로 시뮬레이션하며 게임을 구성하는 요소를 노트에 적고 시스템/콘텐츠로 분류한 뒤,
+                PD님과 상의해 마일스톤을 세웠습니다. 데이터 테이블은 프로그래밍 강사님께 작성 이유를 직접 물어 확인했습니다.</p>
+                <ul class="step__list">
+                  <li>검토한 대안 A — 계획한 콘텐츠를 전부 만드는 원래 일정. 남은 기한 안에 완성이 불가능해 탈락.</li>
+                  <li>채택안 B — 당장 필요한 것과 후순위인 것을 나눠, 후순위 콘텐츠 제작을 덜고 완성도에 집중. 팀원의 개인 의견을 지속적으로 확인해 기준으로 삼았습니다.</li>
+                </ul>
+              </div>
+            </li>
+            <li class="step" data-step="result">
+              <span class="step__no"></span>
+              <div class="step__body">
+                <h4 class="step__label"></h4>
+                <p>목표였던 플레이 100명을 달성했고 조회수도 300명을 넘겼습니다. 프로젝트 일정을 준수했고, 실질적인 출시까지 성공했습니다.</p>
+                <dl class="metric-row">
+                  <div class="metric"><dt>플레이</dt><dd class="metric__value">100+</dd></div>
+                  <div class="metric"><dt>조회수</dt><dd class="metric__value">300+</dd></div>
+                  <div class="metric"><dt>일정 준수</dt><dd class="metric__value">달성</dd></div>
+                </dl>
+              </div>
+            </li>
+            <li class="step step--last" data-step="learning">
+              <span class="step__no"></span>
+              <div class="step__body">
+                <h4 class="step__label"></h4>
+                <p>질문하는 것이 업무 시간을 효과적으로 단축시켜준다는 것을 명확히 알게 됐습니다.
+                다음에는 더 일찍 묻고, 프로젝트를 거시적인 관점에서 먼저 조망한 뒤 세부로 들어가려 합니다.</p>
+                <div class="chips">
+                  <span class="chip">일정 관리(WBS)</span>
+                  <span class="chip">데이터 테이블 설계</span>
+                  <span class="chip">질문 기반 문제 해결</span>
+                </div>
+              </div>
+            </li>
+          </ol>
+        </article>
+
+        <article class="case" data-case>
+          <header class="case__head">
+            <div>
+              <span class="tag" data-accent="tangerine">CASE 02</span>
+              <h3 class="h-xs case__title">체크매터 — UI/UX</h3>
+            </div>
+            <span class="case__period mono">2026.07.09 – 2026.07.19</span>
+          </header>
+
+          <ol class="steps">
+            <li class="step" data-step="situation">
+              <span class="step__no"></span>
+              <div class="step__body"><h4 class="step__label"></h4>
+                <p>TODO: 배경과 제약.</p></div>
+            </li>
+            <li class="step" data-step="task">
+              <span class="step__no"></span>
+              <div class="step__body"><h4 class="step__label"></h4>
+                <p>TODO: 맡은 과제와 문제 정의.</p></div>
+            </li>
+            <li class="step" data-step="action">
+              <span class="step__no"></span>
+              <div class="step__body"><h4 class="step__label"></h4>
+                <p>TODO: 실제로 한 일과 선택 기준.</p></div>
+            </li>
+            <li class="step" data-step="result">
+              <span class="step__no"></span>
+              <div class="step__body"><h4 class="step__label"></h4>
+                <p>TODO: 달라진 것.</p>
+                <dl class="metric-row">
+                  <div class="metric"><dt>TODO 지표</dt><dd class="metric__value">00%</dd></div>
+                  <div class="metric"><dt>TODO 지표</dt><dd class="metric__value">000</dd></div>
+                </dl>
+              </div>
+            </li>
+            <li class="step step--last" data-step="learning">
+              <span class="step__no"></span>
+              <div class="step__body"><h4 class="step__label"></h4>
+                <p>TODO: 얻은 판단 기준.</p>
+                <div class="chips"><span class="chip">TODO 역량</span><span class="chip">TODO 역량</span></div></div>
+            </li>
+          </ol>
+        </article>
+      </div>
+
+      <!-- 4. 포부 -->
+      <div class="section" data-reveal data-anchor="resume-goal" data-anchor-label="4. 포부">
+        <div class="rsec-head">
+          <span class="rsec-num">04</span>
+          <h2 class="h-sm">기획자가 된다면</h2>
+        </div>
+
+        <div class="goals">
+          <article class="goal" data-accent="blue">
+            <span class="goal__term">입사 후 6개월</span>
+            <h3 class="h-xs">TODO: 단기 목표</h3>
+            <p class="muted">TODO: 팀의 기획 문서 체계와 업무 방식을 익히고, 무엇으로 먼저 기여할지 구체적으로.</p>
+          </article>
+          <article class="goal" data-accent="lavender">
+            <span class="goal__term">1 – 2년</span>
+            <h3 class="h-xs">TODO: 중기 목표</h3>
+            <p class="muted">TODO: 어떤 영역(시스템/콘텐츠/데이터 등)을 맡고 싶은지, 어떤 결과로 증명할지.</p>
+          </article>
+          <article class="goal" data-accent="green">
+            <span class="goal__term">3년 이후</span>
+            <h3 class="h-xs">TODO: 장기 목표</h3>
+            <p class="muted">TODO: 어떤 기획자가 되어 있고 싶은지.</p>
+          </article>
+        </div>
+
+        <div class="closing" data-reveal>
+          <p class="closing__text">끝까지 듣고, 끝까지 완성하는 기획자가 되겠습니다.</p>
+          <div class="closing__actions">
+            <a class="btn btn--filled" href="mailto:silsilkyw@naver.com">연락하기</a>
+            <a class="btn btn--outline" href="#docs" data-tab-link="docs">포트폴리오 문서</a>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <p class="caption muted">© 2026 김영웅 · silsilkyw@naver.com · GitHub (TODO: 링크 연결)</p>
+    <p class="caption muted mono">content v0.9</p>
+  </div>
+</footer>
+
+<!-- ============================================================
+     테마 패널 — 2단계: 전 컨트롤 실동작
+     ============================================================ -->
+<aside class="theme-panel" id="theme-panel" aria-label="테마 설정" hidden>
+  <header class="theme-panel__head">
+    <h2 class="h-xs">테마 설정</h2>
+    <button class="btn btn--ghost btn--sm" type="button" id="btn-theme-close" aria-label="닫기">&#10005;</button>
+  </header>
+
+  <div class="theme-panel__body">
+
+    <section class="tp-group">
+      <h3 class="tp-group__title">모드</h3>
+      <div class="seg" id="mode-seg" role="group" aria-label="라이트 · 다크 모드">
+        <button type="button" data-mode="auto" class="is-active">시스템</button>
+        <button type="button" data-mode="light">라이트</button>
+        <button type="button" data-mode="dark">다크</button>
+      </div>
+    </section>
+
+    <section class="tp-group">
+      <h3 class="tp-group__title">프리셋</h3>
+      <div class="preset-grid" id="preset-grid"></div>
+    </section>
+
+    <section class="tp-group">
+      <h3 class="tp-group__title">색상</h3>
+      <div class="tp-row"><label for="tp-accent">액센트</label><input type="color" id="tp-accent" data-var="--accent" value="#2563eb"></div>
+      <div class="tp-row"><label for="tp-bg">배경</label><input type="color" id="tp-bg" data-var="--bg" value="#ffffff"></div>
+      <div class="tp-row"><label for="tp-bgalt">영역 배경</label><input type="color" id="tp-bgalt" data-var="--bg-alt" value="#f5f5f5"></div>
+      <div class="tp-row"><label for="tp-surface">카드 배경</label><input type="color" id="tp-surface" data-var="--surface" value="#ffffff"></div>
+      <div class="tp-row"><label for="tp-text">본문 글자</label><input type="color" id="tp-text" data-var="--text" value="#171717"></div>
+      <div class="tp-row"><label for="tp-text3">보조 글자</label><input type="color" id="tp-text3" data-var="--text-3" value="#737373"></div>
+      <div class="tp-row"><label for="tp-border">테두리</label><input type="color" id="tp-border" data-var="--border" value="#e5e5e5"></div>
+      <div class="tp-row"><label for="tp-action">주 버튼</label><input type="color" id="tp-action" data-var="--action-fill" value="#000000"></div>
+    </section>
+
+    <section class="tp-group">
+      <h3 class="tp-group__title">타이포그래피</h3>
+      <div class="tp-row"><label for="tp-font-display">제목 폰트</label>
+        <select id="tp-font-display" data-var="--font-display" data-raw="1">
+          <option value="var(--font-satoshi)">Satoshi / Pretendard</option>
+          <option value="var(--font-inter)">Inter</option>
+          <option value="var(--font-mono)">Mono</option>
+          <option value="Georgia, 'Times New Roman', serif">Serif</option>
+        </select></div>
+      <div class="tp-row"><label for="tp-font-body">본문 폰트</label>
+        <select id="tp-font-body" data-var="--font-body" data-raw="1">
+          <option value="var(--font-inter)">Inter / Pretendard</option>
+          <option value="var(--font-satoshi)">Satoshi</option>
+          <option value="var(--font-mono)">Mono</option>
+          <option value="Georgia, 'Times New Roman', serif">Serif</option>
+        </select></div>
+      <div class="tp-row"><label for="tp-display-scale">제목 크기<span class="tp-row__val" data-val-for="tp-display-scale"></span></label>
+        <input type="range" id="tp-display-scale" data-var="--display-scale" min="0.7" max="1.4" step="0.05" value="1"></div>
+      <div class="tp-row"><label for="tp-type-scale">본문 크기<span class="tp-row__val" data-val-for="tp-type-scale"></span></label>
+        <input type="range" id="tp-type-scale" data-var="--type-scale" min="0.85" max="1.25" step="0.05" value="1"></div>
+      <div class="tp-row"><label for="tp-weight-body">본문 굵기<span class="tp-row__val" data-val-for="tp-weight-body"></span></label>
+        <input type="range" id="tp-weight-body" data-var="--weight-body" min="300" max="600" step="100" value="400"></div>
+      <div class="tp-row"><label for="tp-weight-heading">제목 굵기<span class="tp-row__val" data-val-for="tp-weight-heading"></span></label>
+        <input type="range" id="tp-weight-heading" data-var="--weight-heading" min="400" max="800" step="100" value="600"></div>
+    </section>
+
+    <section class="tp-group">
+      <h3 class="tp-group__title">레이아웃 &middot; 페이지 길이</h3>
+      <div class="tp-row"><label for="tp-maxw">본문 최대 폭<span class="tp-row__val" data-val-for="tp-maxw"></span></label>
+        <input type="range" id="tp-maxw" data-var="--content-max" data-unit="px" min="880" max="1440" step="20" value="1200"></div>
+      <div class="tp-row"><label for="tp-section-gap">섹션 간격<span class="tp-row__val" data-val-for="tp-section-gap"></span></label>
+        <input type="range" id="tp-section-gap" data-var="--section-gap" data-unit="px" min="24" max="160" step="8" value="64"></div>
+      <div class="tp-row"><label for="tp-section-min">섹션 최소 높이<span class="tp-row__val" data-val-for="tp-section-min"></span></label>
+        <input type="range" id="tp-section-min" data-var="--section-min-height" data-unit="dvh" min="0" max="100" step="5" value="0"></div>
+      <div class="tp-row"><label for="tp-density">밀도<span class="tp-row__val" data-val-for="tp-density"></span></label>
+        <input type="range" id="tp-density" data-var="--density" min="0.75" max="1.4" step="0.05" value="1"></div>
+      <div class="tp-row"><label for="tp-radius">모서리 라운드<span class="tp-row__val" data-val-for="tp-radius"></span></label>
+        <input type="range" id="tp-radius" data-var="--radius-scale" min="0" max="2" step="0.1" value="1"></div>
+      <div class="tp-row"><label for="tp-nav">상단바 높이<span class="tp-row__val" data-val-for="tp-nav"></span></label>
+        <input type="range" id="tp-nav" data-var="--nav-height" data-unit="px" min="48" max="88" step="4" value="56"></div>
+      <div class="tp-row"><label for="tp-sidebar">사이드 폭<span class="tp-row__val" data-val-for="tp-sidebar"></span></label>
+        <input type="range" id="tp-sidebar" data-var="--sidebar-width" data-unit="px" min="140" max="300" step="10" value="220"></div>
+    </section>
+
+    <p class="caption muted tp-note">
+      변경한 값은 <strong>이 브라우저 세션에만</strong> 적용됩니다. 마음에 드는 조합을 찾았으면
+      <strong>CSS 복사</strong>로 코드를 받아 <code class="mono">style.css</code>의 <code class="mono">:root</code>에 붙여넣으세요.
+    </p>
+
+  </div>
+
+  <footer class="theme-panel__foot">
+    <button class="btn btn--filled btn--sm" type="button" id="btn-export">CSS 복사</button>
+    <button class="btn btn--outline btn--sm" type="button" id="btn-reset">초기화</button>
+  </footer>
+</aside>
+<div class="theme-scrim" id="theme-scrim" hidden></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="app.js"></script>
+
+<!-- ▼ 임시 편집 도구 — 내용 기입이 끝나면 이 줄과 edit-mode.js 를 삭제하세요.
+     (HTML 내보내기로 받은 파일에는 이 줄이 이미 빠져 있습니다) -->
+<script src="edit-mode.js"></script>
+</body>
+</html>
