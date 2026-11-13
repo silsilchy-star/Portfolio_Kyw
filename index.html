@@ -1,832 +1,633 @@
 <!DOCTYPE html>
-<html lang="ko"><head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="format-detection" content="telephone=no">
-<meta name="theme-color" content="#ffffff">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="description" content="게임 기획자 지망생 김영웅의 포트폴리오. 심비온 프로젝트 PM 경험과 프로젝트·기술·문서를 소개합니다.">
-<title>김영웅 — Portfolio</title>
-<!-- 한글 웹폰트 : Pretendard Variable (SIL OFL, 상업적 이용 가능) -->
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin="">
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>이름 · 포트폴리오</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/*
+  명함형 개인 웹 포트폴리오 · HTML 초안
+  구조와 동작: CLAUDE_HANDOFF.md 합의본
+  톤: 흰 바탕과 짙은 남색 강조 하나, 얇고 큰 영문 표제, 줄 단위 가림 등장, 둥근 미디어가 넓어지는 스크롤 연출, 남색 푸터
+  글꼴: 표제·UI·숫자는 Pretendard, 긴 국문 본문은 Noto Sans KR
+*/
+:root {
+  --font-ui: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --font-read: "Noto Sans KR", "Pretendard Variable", Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --ease: cubic-bezier(.19, 1, .22, 1);
+  --ease-soft: cubic-bezier(.4, 0, .2, 1);
+  --header-h: 80px;
+  --gutter: clamp(20px, 4.4vw, 64px);
+  --max: 1440px;
+}
+:root[data-theme="light"] {
+  --bg: #ffffff; --sub: #f3f4f8; --ink: #1a1a1a; --muted: #5c5f66; --accent: #0006b1; --line: #e2e3e8;
+  --hatch: rgba(26, 26, 26, .06); --foot-bg: #0e0f2c; --foot-ink: #ffffff; --foot-muted: rgba(255, 255, 255, .72);
+  --header-bg: rgba(255, 255, 255, .92); color-scheme: light;
+}
+:root[data-theme="dark"] {
+  --bg: #16171b; --sub: #1f2025; --ink: #e8e8ea; --muted: #a3a5ab; --accent: #9ea3ff; --line: #2e3036;
+  --hatch: rgba(232, 232, 234, .06); --foot-bg: #0b0c10; --foot-ink: #e8e8ea; --foot-muted: rgba(232, 232, 234, .7);
+  --header-bg: rgba(22, 23, 27, .92); color-scheme: dark;
+}
+:root[data-theme="ivory"] {
+  --bg: #f6f0e4; --sub: #eee5d4; --ink: #33261b; --muted: #6a5646; --accent: #8a3a10; --line: #ddd0b8;
+  --hatch: rgba(51, 38, 27, .07); --foot-bg: #2a1f16; --foot-ink: #f6f0e4; --foot-muted: rgba(246, 240, 228, .74);
+  --header-bg: rgba(246, 240, 228, .92); color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+html { scroll-padding-top: calc(var(--header-h) + 24px); }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-ui); font-size: 16px; line-height: 1.6; word-break: keep-all; overflow-wrap: break-word; -webkit-font-smoothing: antialiased; transition: background-color .4s var(--ease-soft), color .4s var(--ease-soft); }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+h1, h2, h3, h4, p, ol, ul, dl, dd { margin: 0; }
+ol, ul { padding: 0; list-style: none; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* 자리 표시 (빗금) */
+.ph { position: relative; background: var(--sub); background-image: repeating-linear-gradient(135deg, var(--hatch) 0 1px, transparent 1px 12px); }
+.ph-cap { position: absolute; left: 16px; bottom: 14px; font-size: 12px; font-weight: 500; letter-spacing: .04em; color: var(--muted); }
+.empty { color: var(--muted); }
+
+/* 줄 가림 등장 */
+.mask { display: block; overflow: hidden; }
+.mask > span { display: block; transform: translateY(105%); transition: transform 1.1s var(--ease); }
+.is-in .mask > span, .mask.is-in > span { transform: none; }
+.fade { opacity: 0; transform: translateY(24px); transition: opacity .9s var(--ease-soft), transform 1.1s var(--ease); }
+.fade.is-in { opacity: 1; transform: none; }
+
+/* 헤더 */
+.header { position: fixed; inset: 0 0 auto; z-index: 30; height: var(--header-h); background: var(--header-bg); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border-bottom: 1px solid transparent; transition: border-color .3s, background-color .4s; }
+.header.scrolled { border-bottom-color: var(--line); }
+.header .wrap { height: 100%; display: flex; align-items: center; gap: 48px; }
+.brand { font-weight: 700; font-size: 18px; letter-spacing: -.01em; }
+.gnb { display: flex; gap: 40px; }
+.gnb a { font-size: 16px; font-weight: 500; position: relative; padding: 6px 0; }
+.gnb a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: right; transition: transform .5s var(--ease); }
+.gnb a:hover::after, .gnb a[aria-current]::after { transform: scaleX(1); transform-origin: left; }
+.tools { margin-left: auto; display: flex; align-items: center; gap: 20px; }
+.themes { display: flex; gap: 6px; align-items: center; }
+.themes button { width: 18px; height: 18px; border-radius: 50%; border: 1px solid var(--line); position: relative; }
+.themes button[aria-pressed="true"]::after { content: ""; position: absolute; inset: -5px; border-radius: 50%; border: 1px solid var(--ink); }
+.t-light { background: #ffffff; } .t-dark { background: #16171b; } .t-ivory { background: #f6f0e4; }
+.edit-btn { height: 34px; padding: 0 14px; border: 1px solid var(--line); border-radius: 50px; font-size: 13px; font-weight: 500; transition: background-color .3s, color .3s, border-color .3s; }
+.edit-btn[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.menu-btn { display: none; height: 40px; padding: 0 2px; font-size: 14px; font-weight: 600; align-items: center; gap: 8px; }
+.menu-btn .bars { width: 18px; height: 10px; position: relative; }
+.menu-btn .bars::before, .menu-btn .bars::after { content: ""; position: absolute; left: 0; right: 0; height: 1.5px; background: currentColor; transition: transform .4s var(--ease); }
+.menu-btn .bars::before { top: 0; } .menu-btn .bars::after { bottom: 0; }
+.menu-btn[aria-expanded="true"] .bars::before { transform: translateY(4.25px) rotate(45deg); }
+.menu-btn[aria-expanded="true"] .bars::after { transform: translateY(-4.25px) rotate(-45deg); }
+.dropdown { position: fixed; top: var(--header-h); left: 0; right: 0; z-index: 29; background: var(--bg); border-bottom: 1px solid var(--line); box-shadow: 0 16px 24px -16px rgba(0,0,0,.18); display: none; }
+.dropdown.open { display: block; }
+.dropdown a { display: block; padding: 16px var(--gutter); font-size: 18px; font-weight: 600; border-top: 1px solid var(--line); }
+
+/* 편집 모드 */
+body.editing [data-edit] { outline: 1px dashed var(--accent); outline-offset: 4px; cursor: text; }
+body.editing [data-edit]:focus { outline-style: solid; }
+.edit-note { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); z-index: 40; background: var(--ink); color: var(--bg); padding: 12px 20px; border-radius: 50px; font-size: 14px; display: none; align-items: center; gap: 16px; }
+body.editing .edit-note { display: flex; }
+.edit-note button { color: var(--bg); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+
+/* 페이지 전환 */
+main { padding-top: var(--header-h); min-height: 100vh; }
+.view { animation: viewIn .7s var(--ease) both; }
+@keyframes viewIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+
+/* 공통 섹션 머리 */
+.sec { padding: clamp(96px, 12vw, 180px) 0; }
+.sec + .sec { border-top: 1px solid var(--line); }
+.sec-head { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 24px; margin-bottom: clamp(40px, 5vw, 72px); }
+.eyebrow { font-size: 15px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin-bottom: 18px; display: block; }
+.sec-title { font-size: clamp(40px, 5.6vw, 84px); line-height: 1.02; font-weight: 300; letter-spacing: -.035em; }
+.sec-title b { font-weight: 700; }
+.sec-desc { font-size: 17px; color: var(--muted); max-width: 32ch; text-align: right; }
+
+/* 1 자기소개 히어로 */
+.hero { display: block; min-height: calc(100vh - var(--header-h)); }
+.hero-in { display: grid; grid-template-columns: 1fr 1fr; align-items: end; gap: clamp(24px, 4vw, 64px); min-height: calc(100vh - var(--header-h)); padding-top: 40px; padding-bottom: 0; }
+.hero-name { padding-bottom: clamp(48px, 9vh, 120px); align-self: center; }
+.hero-name h1 { font-size: clamp(64px, 10.4vw, 168px); line-height: .98; font-weight: 200; letter-spacing: -.045em; text-decoration: none; text-underline-offset: .12em; text-decoration-thickness: 2px; }
+.hero:hover h1, .hero:focus-visible h1 { text-decoration: underline; }
+.hero:focus-visible { outline: none; }
+.hero:focus-visible .hero-photo { outline: 2px solid var(--accent); outline-offset: 6px; }
+.hero-photo { position: relative; height: calc(100vh - var(--header-h) - 40px); min-height: 520px; overflow: hidden; clip-path: inset(var(--ci, 6%) var(--ci, 6%) 0 var(--ci, 6%) round var(--cr, 48px) var(--cr, 48px) 0 0); will-change: clip-path; }
+.hero-photo .ph { position: absolute; inset: 0; transform: scale(var(--ps, 1.08)); }
+
+/* 2 이력과 자격증 */
+.cv { max-width: 880px; display: grid; gap: 56px; }
+.cv h3 { font-size: 24px; font-weight: 700; letter-spacing: -.02em; padding-bottom: 16px; border-bottom: 1px solid var(--ink); display: flex; justify-content: space-between; align-items: baseline; }
+.cv h3 small { font-size: 13px; font-weight: 500; color: var(--muted); letter-spacing: .12em; }
+.cv li { display: grid; grid-template-columns: 180px 1fr; gap: 24px; padding: 22px 0; border-bottom: 1px solid var(--line); font-size: 17px; }
+.cv li span:first-child { color: var(--muted); font-variant-numeric: tabular-nums; }
+
+/* 3 프로젝트 카드 */
+.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 2vw, 32px); }
+.card { position: relative; }
+.card-media { position: relative; aspect-ratio: 4 / 5; border-radius: 20px; overflow: hidden; }
+.card-media .ph, .card-media .preview { position: absolute; inset: 0; }
+.card-media .ph { transition: transform 1s var(--ease); }
+.preview { opacity: 0; transition: opacity .4s var(--ease-soft); background: #0e0f2c; overflow: hidden; }
+.preview::before { content: ""; position: absolute; inset: -40%; background: conic-gradient(from 0deg, #0e0f2c, #1c2a7a, #0e0f2c 40%, #23305f, #0e0f2c); animation: spin 8s linear infinite; animation-play-state: paused; opacity: .9; }
+.preview .ph-cap { color: rgba(255,255,255,.75); }
+.preview .mute { position: absolute; top: 16px; right: 16px; font-size: 12px; font-weight: 500; color: rgba(255,255,255,.8); border: 1px solid rgba(255,255,255,.35); border-radius: 50px; padding: 3px 10px; }
+.card.playing .preview { opacity: 1; }
+.card.playing .preview::before { animation-play-state: running; }
+@keyframes spin { to { transform: rotate(1turn); } }
+.card-body { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 20px 4px 0; }
+.card-title { font-size: 22px; font-weight: 600; letter-spacing: -.02em; }
+.card-no { font-size: 14px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.card-link { position: absolute; inset: 0; z-index: 1; border-radius: 20px; }
+.card-link:focus-visible { outline-offset: 6px; }
+.play { position: absolute; z-index: 2; right: 14px; bottom: 14px; width: 48px; height: 48px; border-radius: 50%; background: var(--bg); color: var(--ink); display: none; align-items: center; justify-content: center; box-shadow: 0 4px 16px rgba(0,0,0,.18); }
+.play svg { width: 16px; height: 16px; }
+@media (hover: hover) {
+  .card:hover .card-media .ph { transform: scale(1.04); }
+}
+@media (hover: none) {
+  .play { display: flex; }
+}
+
+/* 4 서재 */
+.shelf { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 2vw, 32px); }
+.cover { position: relative; display: flex; flex-direction: column; justify-content: space-between; aspect-ratio: 3 / 4; padding: clamp(24px, 2.6vw, 40px); border-radius: 6px 20px 20px 6px; background: var(--sub); overflow: hidden; transition: transform .8s var(--ease), box-shadow .8s var(--ease); }
+.cover::before { content: ""; position: absolute; left: 14px; top: 0; bottom: 0; width: 1px; background: var(--line); }
+.cover .k { font-size: 13px; font-weight: 500; letter-spacing: .14em; color: var(--accent); text-transform: uppercase; }
+.cover h3 { font-size: clamp(28px, 2.8vw, 44px); font-weight: 300; letter-spacing: -.03em; line-height: 1.15; }
+.cover .n { font-size: 14px; color: var(--muted); display: flex; justify-content: space-between; }
+.cover .arrow { transition: transform .6s var(--ease); }
+@media (hover: hover) { .cover:hover { transform: translateY(-6px); box-shadow: 0 24px 40px -24px rgba(14,15,44,.35); } .cover:hover .arrow { transform: translateX(6px); } }
+
+/* 푸터 */
+.footer { background: var(--foot-bg); color: var(--foot-ink); padding: clamp(80px, 10vw, 140px) 0 48px; }
+.footer .big { font-size: clamp(56px, 11vw, 176px); font-weight: 200; letter-spacing: -.05em; line-height: .95; }
+.footer .big b { font-weight: 600; }
+.footer .row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; margin-top: 64px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.18); color: var(--foot-muted); font-size: 14px; }
+
+/* 상세 공통 */
+.back { display: inline-flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 500; color: var(--muted); padding: 8px 0; transition: color .3s; }
+.back:hover { color: var(--ink); }
+.read { font-family: var(--font-read); font-size: 18px; line-height: 1.9; color: var(--ink); }
+.read p + p { margin-top: 1.2em; }
+.col { max-width: 760px; margin: 0 auto; }
+
+/* 자기소개서 상세 */
+.about { padding: 72px 0 140px; text-align: center; }
+.about h1 { font-size: clamp(32px, 4vw, 56px); font-weight: 600; letter-spacing: -.03em; line-height: 1.2; }
+.about .portrait { width: min(560px, 100%); aspect-ratio: 4 / 5; margin: 56px auto 72px; border-radius: 28px; overflow: hidden; }
+.about .portrait .ph { width: 100%; height: 100%; }
+.about .read { text-align: left; }
+
+/* 프로젝트 상세 */
+.p-cover { position: relative; height: min(78vh, 760px); min-height: 440px; overflow: hidden; color: #fff; }
+.p-cover .ph { position: absolute; inset: 0; background-color: #2b2e4a; background-image: repeating-linear-gradient(135deg, rgba(255,255,255,.06) 0 1px, transparent 1px 12px); }
+.p-cover .ph-cap { color: rgba(255,255,255,.7); left: auto; right: var(--gutter); bottom: auto; top: 24px; }
+.p-cover::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,11,30,0) 35%, rgba(10,11,30,.78) 100%); }
+.p-cover .wrap { position: absolute; left: 0; right: 0; bottom: 0; z-index: 1; padding-bottom: clamp(32px, 5vw, 64px); }
+.p-cover .eyebrow { color: rgba(255,255,255,.8); }
+.p-cover h1 { font-size: clamp(44px, 7vw, 112px); font-weight: 300; letter-spacing: -.04em; line-height: 1; }
+.p-info { display: flex; flex-wrap: wrap; gap: 12px 40px; margin-top: 32px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.3); }
+.p-info div { display: flex; flex-direction: column; gap: 4px; }
+.p-info dt { font-size: 12px; letter-spacing: .1em; color: rgba(255,255,255,.72); }
+.p-info dd { font-size: 16px; font-weight: 500; }
+.steps { padding: clamp(80px, 10vw, 140px) 0; }
+.step { display: grid; grid-template-columns: 96px 1fr; gap: 0 32px; padding: 56px 0; border-top: 1px solid var(--line); }
+.step:last-child { border-bottom: 1px solid var(--line); }
+.step .no { font-size: 15px; font-weight: 500; color: var(--muted); font-variant-numeric: tabular-nums; padding-top: 10px; }
+.step h2 { font-size: clamp(26px, 2.6vw, 36px); font-weight: 600; letter-spacing: -.025em; line-height: 1.3; margin-bottom: 14px; }
+.step .purpose { font-size: 15px; color: var(--muted); margin-bottom: 28px; }
+.step .ph { height: 140px; border-radius: 12px; }
+.step.key { border-top: 2px solid var(--accent); }
+.step.key .no { color: var(--accent); font-weight: 700; }
+.step.key h2::after { content: "핵심"; display: inline-block; vertical-align: middle; margin-left: 12px; font-size: 12px; font-weight: 600; letter-spacing: .06em; color: var(--accent); border: 1px solid var(--accent); border-radius: 50px; padding: 2px 10px; }
+.step.key .ph { height: 220px; }
+.p-next { display: flex; justify-content: space-between; padding: 0 0 120px; }
+
+/* 서재 목록 */
+.lib-head { padding: 72px 0 40px; display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 24px; }
+.lib-head h1 { font-size: clamp(40px, 5.6vw, 84px); font-weight: 300; letter-spacing: -.035em; line-height: 1.05; }
+.sort { display: inline-flex; border: 1px solid var(--line); border-radius: 50px; padding: 4px; }
+.sort button { height: 36px; padding: 0 16px; border-radius: 50px; font-size: 14px; font-weight: 500; color: var(--muted); transition: background-color .3s, color .3s; }
+.sort button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+.rows { border-top: 1px solid var(--ink); margin-bottom: 140px; }
+.rows a { display: grid; grid-template-columns: 160px 1fr auto; gap: 24px; align-items: baseline; padding: 28px 0; border-bottom: 1px solid var(--line); transition: padding .5s var(--ease), color .3s; }
+.rows time { font-size: 15px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.rows .tt { font-size: 22px; font-weight: 500; letter-spacing: -.02em; }
+.rows .arrow { color: var(--muted); transition: transform .5s var(--ease), color .3s; }
+@media (hover: hover) { .rows a:hover { padding-left: 12px; } .rows a:hover .arrow { transform: translateX(6px); color: var(--accent); } }
+
+/* 기록 상세 */
+.record { padding: 72px 0 140px; }
+.record h1 { font-size: clamp(32px, 4vw, 52px); font-weight: 600; letter-spacing: -.03em; line-height: 1.25; margin-top: 40px; }
+.record time { display: block; margin: 20px 0 56px; padding-bottom: 32px; border-bottom: 1px solid var(--line); color: var(--muted); font-size: 15px; font-variant-numeric: tabular-nums; }
+
+@media (max-width: 1023px) {
+  .gnb, .themes-wrap-desk { display: none; }
+  .menu-btn { display: inline-flex; }
+  .cards, .shelf { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 767px) {
+  :root { --header-h: 64px; }
+  .header .wrap { gap: 16px; }
+  .tools { gap: 12px; }
+  .edit-btn { height: 30px; padding: 0 10px; font-size: 12px; }
+  .hero-in { grid-template-columns: 1fr; min-height: auto; align-items: start; padding-top: 32px; gap: 32px; }
+  .hero-name { padding-bottom: 0; }
+  .hero-photo { height: auto; min-height: 0; aspect-ratio: 4 / 5; clip-path: inset(0 round 20px); }
+  .sec-head { grid-template-columns: 1fr; }
+  .sec-desc { text-align: left; }
+  .cv li { grid-template-columns: 1fr; gap: 4px; }
+  .cards, .shelf { grid-template-columns: 1fr; }
+  .cover { aspect-ratio: 16 / 10; }
+  .step { grid-template-columns: 1fr; gap: 8px; padding: 40px 0; }
+  .step .no { padding-top: 0; }
+  .p-info { gap: 14px 28px; }
+  .rows a { grid-template-columns: 1fr auto; gap: 4px 16px; }
+  .rows time { grid-column: 1 / -1; }
+  .rows .tt { font-size: 19px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0s !important; animation-duration: 0s !important; animation-iteration-count: 1 !important; }
+  .mask > span, .fade { transform: none; opacity: 1; }
+  .hero-photo { clip-path: inset(0 round 24px) !important; }
+}
+</style>
 </head>
 <body>
 
-<a class="skip-link" href="#main">본문으로 건너뛰기</a>
+<a class="sr" href="#main">본문 바로가기</a>
 
-<!-- ============================================================
-     상단 헤더 : 로고 + 대분류 탭(SPA 뷰 전환) + 유틸
-     ============================================================ -->
-<header class="topbar" id="topbar">
-  <div class="topbar__inner">
-
-    <a class="brand" href="#intro" data-tab-link="intro">
-      <span class="brand__mark" aria-hidden="true"></span>
-      <span class="brand__text">김영웅<span class="brand__dot">.</span></span>
-    </a>
-
-    <nav class="tabs" id="tabs" aria-label="주요 섹션">
-      <ul class="tabs__list" role="tablist">
-        <li><button class="tab is-active" role="tab" data-tab="intro" aria-selected="true" aria-controls="intro">소개</button></li>
-        <li><button class="tab" role="tab" data-tab="resume" aria-selected="false" aria-controls="resume">이력서</button></li>
-        <li><button class="tab" role="tab" data-tab="projects" aria-selected="false" aria-controls="projects">프로젝트</button></li>
-        <li><button class="tab" role="tab" data-tab="skills" aria-selected="false" aria-controls="skills">기술</button></li>
-        <li><button class="tab" role="tab" data-tab="docs" aria-selected="false" aria-controls="docs">문서</button></li>
-        <li><button class="tab" role="tab" data-tab="games" aria-selected="false" aria-controls="games">게임</button></li>
-      </ul>
+<header class="header" id="header">
+  <div class="wrap">
+    <a class="brand" href="#/" data-edit="name" data-sync="name">이름</a>
+    <nav class="gnb" aria-label="주요 메뉴">
+      <a href="#/intro" data-nav="intro">자기소개</a>
+      <a href="#/career" data-nav="career">이력과 자격증</a>
+      <a href="#/projects" data-nav="projects">프로젝트</a>
+      <a href="#/library" data-nav="library">서재</a>
     </nav>
-
-    <div class="topbar__actions">
-      <button class="btn btn--ghost" type="button" id="btn-sidebar-toggle" aria-label="목차 열기" aria-expanded="false">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 4h12M2 8h12M2 12h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path></svg>
-      </button>
-      <button class="btn btn--outline" type="button" id="btn-theme-panel" aria-controls="theme-panel" aria-expanded="false">
-        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="5.25" stroke="currentColor" stroke-width="1.5"></circle><path d="M8 2.75v10.5" stroke="currentColor" stroke-width="1.5"></path></svg>
-        <span>테마</span>
-      </button>
-      <a class="btn btn--filled" href="#resume" data-tab-link="resume">이력서</a>
+    <div class="tools">
+      <div class="themes" role="group" aria-label="테마">
+        <button type="button" class="t-light" data-theme-btn="light" aria-label="라이트 테마"></button>
+        <button type="button" class="t-dark" data-theme-btn="dark" aria-label="다크 테마"></button>
+        <button type="button" class="t-ivory" data-theme-btn="ivory" aria-label="아이보리 테마"></button>
+      </div>
+      <button type="button" class="edit-btn" id="editBtn" aria-pressed="false">편집</button>
+      <button type="button" class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="dropdown"><span class="bars" aria-hidden="true"></span>메뉴</button>
     </div>
-
   </div>
-  <div class="topbar__progress" id="scroll-progress" aria-hidden="true"><i></i></div>
 </header>
-
-<!-- ============================================================
-     본문 : 좌측 사이드 내비(앵커) + 뷰 영역
-     ============================================================ -->
-<div class="shell">
-
-  <!-- 좌측 고정 사이드 내비 : 활성 탭의 소제목 앵커가 JS로 채워짐 -->
-  <aside class="sidebar" id="sidebar" aria-label="섹션 목차">
-    <div class="sidebar__inner">
-      <p class="sidebar__label">목차</p>
-      <nav class="sidenav" id="sidenav"></nav>
-      <div class="sidebar__foot">
-        <p class="muted caption"><a href="mailto:silsilkyw@naver.com">silsilkyw@naver.com</a> · 010-9139-3106</p>
-      </div>
-    </div>
-  </aside>
-  <div class="sidebar-scrim" id="sidebar-scrim" hidden=""></div>
-
-  <main class="main" id="main">
-
-    <!-- ========================================================
-         1. 소개
-         ======================================================== -->
-    <section class="view is-active" id="intro" data-view="intro" role="tabpanel" aria-labelledby="tab-intro">
-
-      <!-- 히어로 -->
-      <div class="hero" data-anchor="intro-hero" data-anchor-label="히어로" id="intro-hero">
-        <div class="pill-row" data-reveal="">
-          <span class="pill" data-accent="tangerine"><i class="pill__dot"></i>게임 기획 · PM</span>
-          <span class="pill" data-accent="lavender"><i class="pill__dot"></i>일정 관리</span>
-          <span class="pill" data-accent="green"><i class="pill__dot"></i>소통과 협업</span>
-        </div>
-
-        <h1 class="display" data-reveal="">
-경청으로  설계하고,<br>소통으로 완성합니다
-        </h1>
-
-        <p class="hero__sub" data-reveal="">
-     게임 기획자를 지망하는 김영웅입니다. 
-        
-        </p>
-
-        <div class="hero__actions" data-reveal="">
-          <a class="btn btn--filled btn--lg" href="#projects" data-tab-link="projects">프로젝트 보기</a>
-          <a class="btn btn--outline btn--lg" href="#docs" data-tab-link="docs">포트폴리오 문서</a>
-        </div>
-
-        <div class="hero__mock" aria-label="대표 이미지 자리" data-reveal="">
-          <div class="slot slot--wide"><span>TODO: 대표 이미지 / 제품 목업</span></div>
-        </div>
-      </div>
-
-
-      <!-- 궤도 맵 : 5개 목차를 공전 노드로 (다크 풀블리드 밴드) -->
-      <div class="section orbital-wrap" data-reveal="" data-anchor="intro-orbit" data-anchor-label="궤도 맵" id="intro-orbit">
-        <div class="orbital" id="orbital">
-          <div class="orbital__head">
-            <p class="orbital__eyebrow">SITE MAP</p>
-            <h2 class="orbital__title">이 포트폴리오의 구조</h2>
-            <p class="orbital__desc">노드를 누르면 상세가 열리고, 연결된 항목이 함께 빛납니다.</p>
-          </div>
-
-          <div class="orbit" id="orbit" style="--cx: 396px; --cy: 230px; --r: 174.8px;">
-            <div class="orbit__core" aria-hidden="true">
-              <span class="orbit__ping"></span>
-              <span class="orbit__ping orbit__ping--2"></span>
-              <span class="orbit__coredot"></span>
-            </div>
-            <div class="orbit__ring" aria-hidden="true"></div>
-            <div class="orbit__nodes" id="orbit-nodes" role="group" aria-label="포트폴리오 섹션 노드"></div>
-          </div>
-
-          <div class="orbit__panel" id="orbit-panel" hidden=""></div>
-
-          <p class="orbital__hint">빈 공간을 누르면 닫힙니다 · 자동 회전</p>
-        </div>
-      </div>
-
-      <!-- 자기소개 본문 : 목차와 1:1 대응하는 4개 블록 -->
-      <div class="section" data-reveal="" data-anchor="intro-about" data-anchor-label="자기소개" id="intro-about">
-        <h2 class="h-sm">자기소개</h2>
-        <div class="prose">
-          <p>짧지만 다사다난한 경험이 많은 편입니다. 카페와 물류 현장에서 일해봤고, GP에서 군 복무를 하였으며,
-이후 게임 기획을 배우며 세 번의 팀 프로젝트를 거쳤습니다. 그때그때 다른 사람과 다른 문제를 마주하면서도
-끝까지 듣고 끝까지 완성하는 태도, ‘경청’과 ‘목계’를 스스로의 기준으로 삼게 됐습니다.</p>
-          <p>개인의 성과보다 팀이 만든 결과물을 더 중요하게 봅니다. 5인 팀 프로젝트 ‘심비온’에서는 PM을 맡아
-          일정 관리와 업무 분배, 데이터 테이블·TC 작성, itch.io 출시 준비까지 진행했습니다. 게임 개발 경험이
-          많지 않은 상태에서 시작했지만, 모르는 것은 묻고 팀원의 의견을 계속 확인하며 일정을 조정해 실제 출시까지
-          완주했습니다.</p>
-          <p>지금은 디벨로켓 에듀에서 AI 데이터 분석 기반 게임콘텐츠 제작 과정을 밟으며 기획 역량을 넓히고 있습니다.
-          소통과 사회성을 강점으로, 여러 직무 사이에서 정보를 정확히 옮기고 조율하는 기획자가 되려 합니다.</p>
-        </div>
-      </div>
-
-      <div class="section" data-reveal="" data-anchor="intro-summary" data-anchor-label="페이지 안내" id="intro-summary">
-        <h2 class="h-sm">이 포트폴리오의 페이지</h2>
-        <p class="intro-blocks__lead muted">각 카드를 누르면 해당 페이지로 이동합니다.</p>
-        <div class="intro-blocks">
-
-          <a class="intro-block intro-block--wide" data-reveal="" data-accent="sapphire" data-tab-link="resume" href="#resume">
-            <span class="intro-block__tag">이력서</span>
-            <h3 class="h-xs">기획자가 되려는 이유와 강점</h3>
-            <p class="muted">강점과 경험, 문제 해결 과정과 앞으로의 목표를 정리했습니다.</p>
-            <span class="intro-block__go" aria-hidden="true">페이지 열기 →</span>
-          </a>
-
-          <a class="intro-block" data-reveal="" data-accent="tangerine" data-tab-link="projects" href="#projects">
-            <span class="intro-block__tag">프로젝트</span>
-            <h3 class="h-xs">함께 만들고 출시까지 간 팀 프로젝트 3건</h3>
-            <p class="muted">헬 브레이커 · 체크매터 · 심비온의 역할과 결과를 담았습니다.</p>
-            <span class="intro-block__go" aria-hidden="true">페이지 열기 →</span>
-          </a>
-
-          <a class="intro-block" data-reveal="" data-accent="lavender" data-tab-link="skills" href="#skills">
-            <span class="intro-block__tag">기술</span>
-            <h3 class="h-xs">다룰 수 있는 도구와 실제 써본 경험</h3>
-            <p class="muted">Unity · Figma · Github · AI 등, 어디에 어떻게 썼는지까지 적었습니다.</p>
-            <span class="intro-block__go" aria-hidden="true">페이지 열기 →</span>
-          </a>
-
-          <a class="intro-block" data-reveal="" data-accent="blue" data-tab-link="docs" href="#docs">
-            <span class="intro-block__tag">문서</span>
-            <h3 class="h-xs">심비온 프로젝트의 실제 산출물</h3>
-            <p class="muted">WBS · TC · 데이터 테이블 등 프로젝트 문서를 서류철에서 열람할 수 있습니다.</p>
-            <span class="intro-block__go" aria-hidden="true">페이지 열기 →</span>
-          </a>
-
-          <a class="intro-block" data-reveal="" data-accent="green" data-tab-link="games" href="#games">
-            <span class="intro-block__tag">게임</span>
-            <h3 class="h-xs">TODO: 플레이한 게임과 장르 취향</h3>
-            <p class="muted">TODO: 좋아하는 게임과 그 이유를 채우면 취향이 레퍼런스가 됩니다.</p>
-            <span class="intro-block__go" aria-hidden="true">페이지 열기 →</span>
-          </a>
-
-        </div>
-      </div>
-
-      <!-- 이력 -->
-      <div class="section" data-reveal="" data-anchor="intro-career" data-anchor-label="이력" id="intro-career">
-        <h2 class="h-sm">이력</h2>
-        <ol class="timeline">
-          <li class="timeline__item" data-reveal="">
-            <span class="timeline__period mono">2026.05 – 현재</span>
-            <div>
-              <h3 class="h-xs">디벨로켓 에듀 / 교육생</h3>
-              <p class="muted">(기업맞춤형) AI 데이터 분석 기반 게임콘텐츠 제작자 양성 과정. 헬 브레이커 · 체크매터 · 심비온 3개 팀 프로젝트를 진행했습니다.</p>
-            </div>
-          </li>
-          <li class="timeline__item" data-reveal="">
-            <span class="timeline__period mono">2022 – 2024</span>
-            <div>
-              <h3 class="h-xs">대한민국 육군 / 병장 전역</h3>
-              <p class="muted">TODO: 담당 업무와 배운 점을 2~3줄로 (부대·주요 업무 등).</p>
-            </div>
-          </li>
-          <li class="timeline__item" data-reveal="">
-            <span class="timeline__period mono">2018 – 2021</span>
-            <div>
-              <h3 class="h-xs">남한고등학교 / 인문계열</h3>
-              <p class="muted">TODO: 고교 시절 활동 중 기획자 지망과 연결되는 내용이 있다면 1~2줄.</p>
-            </div>
-          </li>
-        </ol>
-      </div>
-
-    </section>
-
-    <!-- ========================================================
-         2. 프로젝트
-         ======================================================== -->
-    <section class="view" id="projects" data-view="projects" role="tabpanel" hidden="">
-
-      <div class="view-head" data-reveal="" data-anchor="projects-head" data-anchor-label="개요" id="projects-head">
-        <h1 class="h-lg">프로젝트</h1>
-        <p class="view-head__sub muted">디벨로켓 에듀 과정에서 진행한 3개 팀 프로젝트입니다.</p>
-      </div>
-
-      <div class="section" data-reveal="" data-anchor="project-1" data-anchor-label="심비온" id="project-1">
-        <article class="project-card">
-          <div class="project-card__media">
-            <!-- iOS 자동재생 필수 속성: playsinline muted autoplay loop -->
-            <video class="project-card__video" playsinline="" muted="" autoplay="" loop="" preload="none" poster=""></video>
-            <div class="slot slot--media"><span>TODO: 심비온 배경 비디오(.mp4) 또는 이미지</span></div>
-          </div>
-          <div class="project-card__body">
-            <div class="project-card__meta">
-              <span class="tag" data-accent="tangerine">TODO 장르</span>
-              <span class="tag">PM</span>
-              <span class="tag mono">2026</span>
-            </div>
-            <h2 class="h-sm">심비온</h2>
-            <p class="muted">5인 팀으로 유니티6 엔진을 사용해 게임을 개발하고 itch.io에 출시까지 진행한 프로젝트입니다.
-            PM으로서 일정 관리(마일스톤·WBS)와 업무 분배, 데이터 테이블·TC 작성, 출시 준비와 사후 관리(개발로그, 홍보용 X 페이지 운영)를 맡았습니다.</p>
-
-            <dl class="metric-row">
-              <div class="metric"><dt>플레이</dt><dd class="metric__value">100+</dd></div>
-              <div class="metric"><dt>조회수</dt><dd class="metric__value">300+</dd></div>
-              <div class="metric"><dt>프로젝트 기간</dt><dd class="metric__value">46일</dd></div>
-              <div class="metric"><dt>팀 인원</dt><dd class="metric__value">5명</dd></div>
-            </dl>
-
-            <div class="project-card__links">
-              <a class="btn btn--outline" href="#" target="_blank" rel="noopener">출시 링크 (TODO: itch.io URL)</a>
-              <a class="btn btn--ghost" href="#docs" data-tab-link="docs">상세 문서</a>
-            </div>
-          </div>
-        </article>
-      </div>
-
-      <div class="section" data-reveal="" data-anchor="project-2" data-anchor-label="체크매터" id="project-2">
-        <article class="project-card">
-          <div class="project-card__media">
-            <div class="slot slot--media"><span>TODO: 체크매터 배경 비디오 또는 이미지</span></div>
-          </div>
-          <div class="project-card__body">
-            <div class="project-card__meta">
-              <span class="tag" data-accent="lavender">TODO 장르</span>
-              <span class="tag">UI / UX</span>
-              <span class="tag mono">2026</span>
-            </div>
-            <h2 class="h-sm">체크매터</h2>
-            <p class="muted">TODO: 프로젝트 설명 3~5줄. 무엇을 만들었고, UI/UX로 어떤 문제를 풀었는지 (기간 07.09~07.19, 약 11일).</p>
-            <dl class="metric-row">
-              <div class="metric"><dt>TODO 지표</dt><dd class="metric__value">000</dd></div>
-              <div class="metric"><dt>TODO 지표</dt><dd class="metric__value">00%</dd></div>
-              <div class="metric"><dt>프로젝트 기간</dt><dd class="metric__value">11일</dd></div>
-            </dl>
-            <div class="project-card__links">
-              <a class="btn btn--outline" href="#" target="_blank" rel="noopener">출시 링크</a>
-            </div>
-          </div>
-        </article>
-      </div>
-
-      <div class="section" data-reveal="" data-anchor="project-3" data-anchor-label="헬 브레이커" id="project-3">
-        <article class="project-card">
-          <div class="project-card__media">
-            <div class="slot slot--media"><span>TODO: 헬 브레이커 배경 비디오 또는 이미지</span></div>
-          </div>
-          <div class="project-card__body">
-            <div class="project-card__meta">
-              <span class="tag" data-accent="green">TODO 장르</span>
-              <span class="tag">업무 분배</span>
-              <span class="tag mono">2026</span>
-            </div>
-            <h2 class="h-sm">헬 브레이커</h2>
-            <p class="muted">TODO: 프로젝트 설명. 어떤 게임이었고 업무 분배에서 무엇을 했는지 (기간 06.05~06.15, 약 11일).</p>
-            <dl class="metric-row">
-              <div class="metric"><dt>TODO 지표</dt><dd class="metric__value">000</dd></div>
-              <div class="metric"><dt>프로젝트 기간</dt><dd class="metric__value">11일</dd></div>
-            </dl>
-            <div class="project-card__links">
-              <a class="btn btn--outline" href="#" target="_blank" rel="noopener">출시 링크</a>
-            </div>
-          </div>
-        </article>
-      </div>
-
-    </section>
-
-    <!-- ========================================================
-         3. 기술
-         ======================================================== -->
-    <section class="view" id="skills" data-view="skills" role="tabpanel" hidden="">
-
-      <div class="view-head" data-reveal="" data-anchor="skills-head" data-anchor-label="개요" id="skills-head">
-        <h1 class="h-lg">기술</h1>
-        <p class="view-head__sub muted">도구별로 ‘무엇을 할 수 있는가 / 어디에 써봤는가’를 적었습니다.</p>
-      </div>
-
-      <div class="section" data-reveal="" data-anchor="skills-engine" data-anchor-label="엔진 · 개발" id="skills-engine">
-        <h2 class="h-sm">엔진 · 개발</h2>
-        <ul class="skill-list">
-          <li class="skill-row" data-reveal="">
-            <span class="skill-row__icon" aria-hidden="true"><span class="slot slot--icon">IC</span></span>
-            <div class="skill-row__name"><strong>Unity</strong><span class="caption muted">프로젝트 활용</span></div>
-            <div class="skill-row__desc muted">유니티6 엔진으로 심비온 프로젝트를 제작해 itch.io 출시까지 진행했습니다.</div>
-          </li>
-          <li class="skill-row" data-reveal="">
-            <span class="skill-row__icon" aria-hidden="true"><span class="slot slot--icon">IC</span></span>
-            <div class="skill-row__name"><strong>TODO: 도구명</strong><span class="caption muted">TODO: 숙련도</span></div>
-            <div class="skill-row__desc muted">TODO: 설명.</div>
-          </li>
-          <li class="skill-row" data-reveal="">
-            <span class="skill-row__icon" aria-hidden="true"><span class="slot slot--icon">IC</span></span>
-            <div class="skill-row__name"><strong>TODO: 도구명</strong><span class="caption muted">TODO: 숙련도</span></div>
-            <div class="skill-row__desc muted">TODO: 설명.</div>
-          </li>
-        </ul>
-      </div>
-
-      <div class="section" data-reveal="" data-anchor="skills-plan" data-anchor-label="기획 · 문서" id="skills-plan">
-        <h2 class="h-sm">기획 · 문서</h2>
-        <ul class="skill-list">
-          <li class="skill-row" data-reveal="">
-            <span class="skill-row__icon" aria-hidden="true"><span class="slot slot--icon">IC</span></span>
-            <div class="skill-row__name"><strong>Figma</strong><span class="caption muted">프로젝트 활용</span></div>
-            <div class="skill-row__desc muted">체크매터 프로젝트에서 UI/UX 설계에 활용했습니다.</div>
-          </li>
-          <li class="skill-row" data-reveal="">
-            <span class="skill-row__icon" aria-hidden="true"><span class="slot slot--icon">IC</span></span>
-            <div class="skill-row__name"><strong>MS Office</strong><span class="caption muted">프로젝트 활용</span></div>
-            <div class="skill-row__desc muted">심비온 프로젝트의 일정 관리, 데이터 테이블, TC(테스트 케이스) 등 개발 문서 작성에 활용했습니다.</div>
-          </li>
-        </ul>
-      </div>
-
-      <div class="section" data-reveal="" data-anchor="skills-data" data-anchor-label="데이터 · 협업" id="skills-data">
-        <h2 class="h-sm">데이터 · 협업</h2>
-        <ul class="skill-list">
-          <li class="skill-row" data-reveal="">
-            <span class="skill-row__icon" aria-hidden="true"><span class="slot slot--icon">IC</span></span>
-            <div class="skill-row__name"><strong>AI</strong><span class="caption muted">디벨로켓 에듀 과정 중</span></div>
-            <div class="skill-row__desc muted">AI 데이터 분석 기반 게임콘텐츠 제작 과정에서 기획 리서치와 문서 작업 보조에 활용하고 있습니다.</div>
-          </li>
-          <li class="skill-row" data-reveal="">
-            <span class="skill-row__icon" aria-hidden="true"><span class="slot slot--icon">IC</span></span>
-            <div class="skill-row__name"><strong>Github</strong><span class="caption muted">TODO: 숙련도</span></div>
-            <div class="skill-row__desc muted">TODO: 팀 프로젝트에서 구체적으로 어떻게 활용했는지.</div>
-          </li>
-        </ul>
-      </div>
-
-    </section>
-
-    <!-- ========================================================
-         4. 문서
-         ======================================================== -->
-    <section class="view" id="docs" data-view="docs" role="tabpanel" hidden="">
-
-      <div class="view-head" data-reveal="" data-anchor="docs-head" data-anchor-label="개요" id="docs-head">
-        <h1 class="h-lg">문서</h1>
-        <p class="view-head__sub muted">
-          심비온 프로젝트에서 작성한 WBS · TC · 데이터 테이블 등의 문서를 서류철에서 꺼내 열람합니다.
-        </p>
-      </div>
-
-      <div class="section" data-reveal="" data-anchor="docs-archive" data-anchor-label="서류철" id="docs-archive">
-        <div class="filedeck" id="filedeck">
-          <div class="filedeck__head">
-            <p class="filedeck__eyebrow">ARCHIVE</p>
-            <h2 class="filedeck__title">문서 서류철</h2>
-            <p class="filedeck__desc">폴더를 누르면 위쪽 서류가 밀려나고 그 문서가 열립니다.</p>
-          </div>
-
-          <div class="fd-stage" id="fd-stage">
-            <div class="fd-viewer-wrap" id="fd-viewer-wrap">
-              <div class="fd-viewer-inner">
-                <article class="fd-viewer" id="fd-viewer"></article>
-              </div>
-            </div>
-
-            <div class="fd-stack" id="fd-stack">
-              <div class="fd-base" id="fd-base"><span class="mono"></span></div>
-            </div>
-          </div>
-
-          <p class="filedeck__hint mono">CLICK A FOLDER · ESC TO CLOSE · ↑ ↓ TO BROWSE</p>
-        </div>
-      </div>
-
-    </section>
-
-    <!-- ========================================================
-         5. 게임
-         ======================================================== -->
-    <section class="view" id="games" data-view="games" role="tabpanel" hidden="">
-
-      <div class="view-head" data-reveal="" data-anchor="games-head" data-anchor-label="개요" id="games-head">
-        <h1 class="h-lg">게임</h1>
-        <p class="view-head__sub muted">TODO: 플레이한 게임 기록과 장르 분포. (app.js의 GAMES 배열을 채우면 자동으로 채워집니다)</p>
-      </div>
-
-      <!-- 장르 비율 그래프 -->
-      <div class="section" data-reveal="" data-anchor="games-chart" data-anchor-label="장르 분포" id="games-chart">
-        <h2 class="h-sm">장르 분포</h2>
-        <div class="card genre-panel">
-          <div class="genre-bar is-in" id="genre-bar" role="img" aria-label="장르 비율 그래프"></div>
-          <ul class="genre-legend" id="genre-legend"></ul>
-          <p class="caption muted">등록된 게임의 장르를 합산해 자동 계산됩니다. 데이터는 <code class="mono">app.js</code> 상단 <code class="mono">GAMES</code> 배열에서 수정하세요.</p>
-        </div>
-      </div>
-
-      <!-- 게임 등록 폼 (골격) -->
-      <div class="section" data-reveal="" data-anchor="games-add" data-anchor-label="게임 등록" id="games-add">
-        <h2 class="h-sm">게임 등록</h2>
-        <form class="card game-form" id="game-form" autocomplete="off">
-          <div class="field">
-            <label for="g-title">제목</label>
-            <input type="text" id="g-title" name="title" placeholder="TODO: 게임 제목">
-          </div>
-          <div class="field">
-            <label for="g-platform">플랫폼</label>
-            <select id="g-platform" name="platform">
-              <option value="">선택</option>
-              <option>PC</option><option>PS5</option><option>Switch</option>
-              <option>Xbox</option><option>Mobile</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="g-genre">장르 <span class="caption muted">(쉼표로 구분)</span></label>
-            <input type="text" id="g-genre" name="genres" placeholder="RPG, 액션">
-          </div>
-          <div class="field">
-            <label for="g-image">이미지 URL</label>
-            <input type="url" id="g-image" name="image" placeholder="https://…">
-          </div>
-          <div class="field field--full">
-            <button class="btn btn--filled" type="submit">등록</button>
-            <span class="caption muted">※ 뼈대 단계 — 새로고침하면 초기화됩니다.</span>
-          </div>
-        </form>
-      </div>
-
-      <!-- 게임 카드 그리드 -->
-      <div class="section" data-reveal="" data-anchor="games-list" data-anchor-label="게임 목록" id="games-list">
-        <h2 class="h-sm">플레이 기록</h2>
-        <div class="game-grid" id="game-grid"></div>
-      </div>
-
-    </section>
-
-
-    <!-- ========================================================
-         6. 이력서
-         ======================================================== -->
-    <section class="view" id="resume" data-view="resume" role="tabpanel" hidden="">
-
-      <div class="view-head" data-reveal="" data-anchor="resume-head" data-anchor-label="개요" id="resume-head">
-        <p class="eyebrow">RESUME</p>
-        <h1 class="h-lg">이력서</h1>
-        <p class="view-head__sub muted">경청으로 듣고 목계로 완성하는, 소통하는 게임 기획자가 되려 합니다.</p>
-        <div class="resume-actions">
-          <a class="btn btn--filled" href="#" target="_blank" rel="noopener">PDF 내려받기 (TODO: 파일 연결)</a>
-          <a class="btn btn--outline" href="#projects" data-tab-link="projects">프로젝트 보기</a>
-        </div>
-      </div>
-
-      <!-- 1. 계기 -->
-      <div class="section" data-reveal="" data-anchor="resume-why" data-anchor-label="1. 계기" id="resume-why">
-        <div class="rsec-head">
-          <span class="rsec-num">01</span>
-          <h2 class="h-sm">기획자를 선택한 계기</h2>
-        </div>
-
-        <blockquote class="rquote" data-accent="blue">
-          <p>TODO: 기획자를 하겠다고 마음먹게 만든 한 문장. 짧고 구체적일수록 좋습니다.</p>
-        </blockquote>
-
-        <div class="rcols">
-          <div class="prose">
-            <p>TODO: 그 계기가 된 구체적인 순간. 언제, 어디서, 무엇을 하다가 그런 생각이 들었는지.</p>
-            <p>TODO: 그 뒤에 무엇을 해봤는지. 생각에 그치지 않았다는 증거.</p>
-          </div>
-          <div class="prose">
-            <p>TODO: 왜 다른 직무가 아니라 기획자인지. 비교해서 설명하면 설득력이 올라갑니다.</p>
-            <p>TODO: 지금도 그 동기가 유효한 이유.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- 2. 강점 -->
-      <div class="section" data-reveal="" data-anchor="resume-strength" data-anchor-label="2. 강점" id="resume-strength">
-        <div class="rsec-head">
-          <span class="rsec-num">02</span>
-          <h2 class="h-sm">강점과 기획자의 연결</h2>
-        </div>
-        <p class="rsec-desc muted">강점 자체보다 <strong>그 강점이 기획 업무의 어느 지점에서 쓰이는지</strong>가 핵심입니다.</p>
-
-        <div class="strength-grid">
-          <article class="strength-card" data-accent="tangerine">
-            <span class="strength-card__no mono">S1</span>
-            <h3 class="h-xs">경청</h3>
-            <p class="strength-card__desc muted">심비온 프로젝트에서 팀원에게 남은 기한에 대한 의견을 지속적으로 물어, 일정을 재조정하고 후순위 콘텐츠를 덜어냈습니다.</p>
-            <div class="strength-card__link">
-              <span class="strength-card__label">기획자로서</span>
-              <p>이해관계자와 팀원의 요구를 정확히 듣고 기획에 반영하는 데 씁니다.</p>
-            </div>
-          </article>
-
-          <article class="strength-card" data-accent="lavender">
-            <span class="strength-card__no mono">S2</span>
-            <h3 class="h-xs">목계 — 흔들리지 않는 꾸준함</h3>
-            <p class="strength-card__desc muted">게임 개발 경험이 많지 않은 상태로 시작했지만, 모르는 것은 질문하며 WBS·TC·데이터 테이블 작성과 출시까지 완주했습니다.</p>
-            <div class="strength-card__link">
-              <span class="strength-card__label">기획자로서</span>
-              <p>일정이 흔들리는 상황에서도 침착하게 우선순위를 재조정하고 끝까지 완성합니다.</p>
-            </div>
-          </article>
-
-          <article class="strength-card" data-accent="green">
-            <span class="strength-card__no mono">S3</span>
-            <h3 class="h-xs">소통과 사회성</h3>
-            <p class="strength-card__desc muted">PD, 프로그래밍 강사, 개발 팀장 등 여러 직무의 사람에게 직접 질문하며 필요한 정보를 끌어냈습니다.</p>
-            <div class="strength-card__link">
-              <span class="strength-card__label">기획자로서</span>
-              <p>여러 직군 사이에서 정보를 정확히 옮기고 조율하는 역할을 맡습니다.</p>
-            </div>
-          </article>
-        </div>
-      </div>
-
-      <!-- 3. 경험 -->
-      <div class="section" data-reveal="" data-anchor="resume-case" data-anchor-label="3. 경험" id="resume-case">
-        <div class="rsec-head">
-          <span class="rsec-num">03</span>
-          <h2 class="h-sm">경험 — 문제 해결 과정</h2>
-          <span class="framework-badge" id="framework-badge"></span>
-        </div>
-        <p class="rsec-desc muted">
-          두 케이스 모두 <strong>같은 전개 틀</strong>로 씁니다. 틀이 같아야 읽는 사람이 두 번째 케이스부터는
-          내용에만 집중할 수 있습니다. 틀은 <code class="mono">app.js</code>의
-          <code class="mono">RESUME_FRAMEWORK</code> 한 줄로 STAR ↔ 상행결배 전환됩니다.
-        </p>
-
-        <article class="case" data-case="">
-          <header class="case__head">
-            <div>
-              <span class="tag" data-accent="blue">CASE 01</span>
-              <h3 class="h-xs case__title">심비온 — 팀 프로젝트 PM</h3>
-            </div>
-            <span class="case__period mono">2026.07.20 – 2026.09.03</span>
-          </header>
-
-          <ol class="steps">
-            <li class="step" data-step="situation">
-              <span class="step__no"></span>
-              <div class="step__body">
-                <h4 class="step__label"></h4>
-                <p>5인 팀으로 유니티6 엔진을 사용해 게임을 개발하고 itch.io에 출시하는 46일짜리 프로젝트였습니다.
-                저는 PM으로 일정 관리, 업무 분배, 개발 문서 작성, 출시 준비를 맡았습니다.
-                목표는 itch.io 조회수 1,000 또는 플레이 100 달성이었습니다.</p>
-              </div>
-            </li>
-            <li class="step" data-step="task">
-              <span class="step__no"></span>
-              <div class="step__body">
-                <h4 class="step__label"></h4>
-                <p>진짜 문제는 <strong>게임 개발 경험이 많지 않은 상태로 구체적인 일정을 산출해야 한다는 것</strong>이었습니다.
-                데이터 테이블은 왜, 어떻게 작성해야 하는지 몰랐고, TC는 기능을 얼마나 세부적으로 쪼개야 하는지,
-                구두로만 공유된 기획을 어떻게 문서에 반영해야 하는지도 불분명했습니다.</p>
-              </div>
-            </li>
-            <li class="step" data-step="action">
-              <span class="step__no"></span>
-              <div class="step__body">
-                <h4 class="step__label"></h4>
-                <p>먼저 프로젝트를 상상으로 시뮬레이션하며 게임을 구성하는 요소를 노트에 적고 시스템/콘텐츠로 분류한 뒤,
-                PD님과 상의해 마일스톤을 세웠습니다. 데이터 테이블은 프로그래밍 강사님께 작성 이유를 직접 물어 확인했습니다.</p>
-                <ul class="step__list">
-                  <li>검토한 대안 A — 계획한 콘텐츠를 전부 만드는 원래 일정. 남은 기한 안에 완성이 불가능해 탈락.</li>
-                  <li>채택안 B — 당장 필요한 것과 후순위인 것을 나눠, 후순위 콘텐츠 제작을 덜고 완성도에 집중. 팀원의 개인 의견을 지속적으로 확인해 기준으로 삼았습니다.</li>
-                </ul>
-              </div>
-            </li>
-            <li class="step" data-step="result">
-              <span class="step__no"></span>
-              <div class="step__body">
-                <h4 class="step__label"></h4>
-                <p>목표였던 플레이 100명을 달성했고 조회수도 300명을 넘겼습니다. 프로젝트 일정을 준수했고, 실질적인 출시까지 성공했습니다.</p>
-                <dl class="metric-row">
-                  <div class="metric"><dt>플레이</dt><dd class="metric__value">100+</dd></div>
-                  <div class="metric"><dt>조회수</dt><dd class="metric__value">300+</dd></div>
-                  <div class="metric"><dt>일정 준수</dt><dd class="metric__value">달성</dd></div>
-                </dl>
-              </div>
-            </li>
-            <li class="step step--last" data-step="learning">
-              <span class="step__no"></span>
-              <div class="step__body">
-                <h4 class="step__label"></h4>
-                <p>질문하는 것이 업무 시간을 효과적으로 단축시켜준다는 것을 명확히 알게 됐습니다.
-                다음에는 더 일찍 묻고, 프로젝트를 거시적인 관점에서 먼저 조망한 뒤 세부로 들어가려 합니다.</p>
-                <div class="chips">
-                  <span class="chip">일정 관리(WBS)</span>
-                  <span class="chip">데이터 테이블 설계</span>
-                  <span class="chip">질문 기반 문제 해결</span>
-                </div>
-              </div>
-            </li>
-          </ol>
-        </article>
-
-        <article class="case" data-case="">
-          <header class="case__head">
-            <div>
-              <span class="tag" data-accent="tangerine">CASE 02</span>
-              <h3 class="h-xs case__title">체크매터 — UI/UX</h3>
-            </div>
-            <span class="case__period mono">2026.07.09 – 2026.07.19</span>
-          </header>
-
-          <ol class="steps">
-            <li class="step" data-step="situation">
-              <span class="step__no"></span>
-              <div class="step__body"><h4 class="step__label"></h4>
-                <p>TODO: 배경과 제약.</p></div>
-            </li>
-            <li class="step" data-step="task">
-              <span class="step__no"></span>
-              <div class="step__body"><h4 class="step__label"></h4>
-                <p>TODO: 맡은 과제와 문제 정의.</p></div>
-            </li>
-            <li class="step" data-step="action">
-              <span class="step__no"></span>
-              <div class="step__body"><h4 class="step__label"></h4>
-                <p>TODO: 실제로 한 일과 선택 기준.</p></div>
-            </li>
-            <li class="step" data-step="result">
-              <span class="step__no"></span>
-              <div class="step__body"><h4 class="step__label"></h4>
-                <p>TODO: 달라진 것.</p>
-                <dl class="metric-row">
-                  <div class="metric"><dt>TODO 지표</dt><dd class="metric__value">00%</dd></div>
-                  <div class="metric"><dt>TODO 지표</dt><dd class="metric__value">000</dd></div>
-                </dl>
-              </div>
-            </li>
-            <li class="step step--last" data-step="learning">
-              <span class="step__no"></span>
-              <div class="step__body"><h4 class="step__label"></h4>
-                <p>TODO: 얻은 판단 기준.</p>
-                <div class="chips"><span class="chip">TODO 역량</span><span class="chip">TODO 역량</span></div></div>
-            </li>
-          </ol>
-        </article>
-      </div>
-
-      <!-- 4. 포부 -->
-      <div class="section" data-reveal="" data-anchor="resume-goal" data-anchor-label="4. 포부" id="resume-goal">
-        <div class="rsec-head">
-          <span class="rsec-num">04</span>
-          <h2 class="h-sm">기획자가 된다면</h2>
-        </div>
-
-        <div class="goals">
-          <article class="goal" data-accent="blue">
-            <span class="goal__term">입사 후 6개월</span>
-            <h3 class="h-xs">TODO: 단기 목표</h3>
-            <p class="muted">TODO: 팀의 기획 문서 체계와 업무 방식을 익히고, 무엇으로 먼저 기여할지 구체적으로.</p>
-          </article>
-          <article class="goal" data-accent="lavender">
-            <span class="goal__term">1 – 2년</span>
-            <h3 class="h-xs">TODO: 중기 목표</h3>
-            <p class="muted">TODO: 어떤 영역(시스템/콘텐츠/데이터 등)을 맡고 싶은지, 어떤 결과로 증명할지.</p>
-          </article>
-          <article class="goal" data-accent="green">
-            <span class="goal__term">3년 이후</span>
-            <h3 class="h-xs">TODO: 장기 목표</h3>
-            <p class="muted">TODO: 어떤 기획자가 되어 있고 싶은지.</p>
-          </article>
-        </div>
-
-        <div class="closing" data-reveal="">
-          <p class="closing__text">끝까지 듣고, 끝까지 완성하는 기획자가 되겠습니다.</p>
-          <div class="closing__actions">
-            <a class="btn btn--filled" href="mailto:silsilkyw@naver.com">연락하기</a>
-            <a class="btn btn--outline" href="#docs" data-tab-link="docs">포트폴리오 문서</a>
-          </div>
-        </div>
-      </div>
-
-    </section>
-
-  </main>
-</div>
+<nav class="dropdown" id="dropdown" aria-label="모바일 메뉴">
+  <a href="#/intro">자기소개</a>
+  <a href="#/career">이력과 자격증</a>
+  <a href="#/projects">프로젝트</a>
+  <a href="#/library">서재</a>
+</nav>
+
+<main id="main" tabindex="-1"></main>
 
 <footer class="footer">
-  <div class="footer__inner">
-    <p class="caption muted">© 2026 김영웅 · silsilkyw@naver.com · GitHub (TODO: 링크 연결)</p>
-    <p class="caption muted mono">content v0.9</p>
+  <div class="wrap">
+    <p class="big"><b>Thank</b> you</p>
+    <div class="row">
+      <span data-edit="name" data-sync="name">이름</span>
+      <span class="empty">연락처 미입력</span>
+      <span>© 2026</span>
+    </div>
   </div>
 </footer>
 
-<!-- ============================================================
-     테마 패널 — 2단계: 전 컨트롤 실동작
-     ============================================================ -->
-<aside class="theme-panel" id="theme-panel" aria-label="테마 설정" hidden="">
-  <header class="theme-panel__head">
-    <h2 class="h-xs">테마 설정</h2>
-    <button class="btn btn--ghost btn--sm" type="button" id="btn-theme-close" aria-label="닫기">✕</button>
-  </header>
+<div class="edit-note" role="status">편집 중입니다. 링크 이동이 멈춰 있습니다. <button type="button" id="editDone">편집 완료</button></div>
 
-  <div class="theme-panel__body">
+<!-- 화면 틀 -->
+<template id="tpl-main">
+  <div class="view">
+    <section id="intro" aria-label="자기소개">
+      <a class="hero" href="#/about" aria-label="자기소개서 열기">
+        <div class="wrap hero-in">
+          <div class="hero-name">
+            <h1><span class="mask"><span data-edit="name" data-sync="name">이름</span></span></h1>
+          </div>
+          <div class="hero-photo" id="heroPhoto">
+            <div class="ph"><span class="ph-cap">프로필 사진</span></div>
+          </div>
+        </div>
+      </a>
+    </section>
 
-    <section class="tp-group">
-      <h3 class="tp-group__title">모드</h3>
-      <div class="seg" id="mode-seg" role="group" aria-label="라이트 · 다크 모드">
-        <button type="button" data-mode="auto" class="is-active">시스템</button>
-        <button type="button" data-mode="light">라이트</button>
-        <button type="button" data-mode="dark">다크</button>
+    <section class="sec" id="career" aria-labelledby="career-t">
+      <div class="wrap">
+        <div class="sec-head">
+          <div><span class="eyebrow">Career &amp; Certificates</span><h2 class="sec-title" id="career-t"><span class="mask"><span>이력과 <b>자격증</b></span></span></h2></div>
+        </div>
+        <div class="cv fade">
+          <div>
+            <h3>이력 <small>CAREER</small></h3>
+            <ul><li><span>기간</span><span class="empty">항목 미입력</span></li></ul>
+          </div>
+          <div>
+            <h3>자격증 <small>CERTIFICATES</small></h3>
+            <ul><li><span>취득일</span><span class="empty">항목 미입력</span></li></ul>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section class="tp-group">
-      <h3 class="tp-group__title">프리셋</h3>
-      <div class="preset-grid" id="preset-grid"><button type="button" class="preset is-active"><span class="preset__swatches"><i style="background:#2563eb"></i><i style="background:#f5f5f5"></i><i style="background:#000000"></i></span><span class="preset__name">기본</span></button><button type="button" class="preset"><span class="preset__swatches"><i style="background:#404040"></i><i style="background:#f4f4f4"></i><i style="background:#171717"></i></span><span class="preset__name">먹지</span></button><button type="button" class="preset"><span class="preset__swatches"><i style="background:#b45309"></i><i style="background:#f3ede2"></i><i style="background:#2a2118"></i></span><span class="preset__name">한지</span></button><button type="button" class="preset"><span class="preset__swatches"><i style="background:#0d9488"></i><i style="background:#f2f7f6"></i><i style="background:#0f2e2a"></i></span><span class="preset__name">청록</span></button><button type="button" class="preset"><span class="preset__swatches"><i style="background:#7c3aed"></i><i style="background:#f6f4fb"></i><i style="background:#231a33"></i></span><span class="preset__name">자주</span></button><button type="button" class="preset"><span class="preset__swatches"><i style="background:#4d8bff"></i><i style="background:#0a0a0a"></i><i style="background:#282828"></i></span><span class="preset__name">심야</span></button></div>
+    <section class="sec" id="projects" aria-labelledby="projects-t">
+      <div class="wrap">
+        <div class="sec-head">
+          <div><span class="eyebrow">Projects</span><h2 class="sec-title" id="projects-t"><span class="mask"><span>진행한 <b>프로젝트</b></span></span></h2></div>
+          <p class="sec-desc fade">사업 부문에서 맡은 책임과 판단 과정</p>
+        </div>
+        <div class="cards" id="cards"></div>
+      </div>
     </section>
 
-    <section class="tp-group">
-      <h3 class="tp-group__title">색상</h3>
-      <div class="tp-row"><label for="tp-accent">액센트</label><input type="color" id="tp-accent" data-var="--accent" value="#2563eb"></div>
-      <div class="tp-row"><label for="tp-bg">배경</label><input type="color" id="tp-bg" data-var="--bg" value="#ffffff"></div>
-      <div class="tp-row"><label for="tp-bgalt">영역 배경</label><input type="color" id="tp-bgalt" data-var="--bg-alt" value="#f5f5f5"></div>
-      <div class="tp-row"><label for="tp-surface">카드 배경</label><input type="color" id="tp-surface" data-var="--surface" value="#ffffff"></div>
-      <div class="tp-row"><label for="tp-text">본문 글자</label><input type="color" id="tp-text" data-var="--text" value="#171717"></div>
-      <div class="tp-row"><label for="tp-text3">보조 글자</label><input type="color" id="tp-text3" data-var="--text-3" value="#737373"></div>
-      <div class="tp-row"><label for="tp-border">테두리</label><input type="color" id="tp-border" data-var="--border" value="#e5e5e5"></div>
-      <div class="tp-row"><label for="tp-action">주 버튼</label><input type="color" id="tp-action" data-var="--action-fill" value="#000000"></div>
+    <section class="sec" id="library" aria-labelledby="library-t">
+      <div class="wrap">
+        <div class="sec-head">
+          <div><span class="eyebrow">Library</span><h2 class="sec-title" id="library-t"><span class="mask"><span><b>서재</b></span></span></h2></div>
+          <p class="sec-desc fade">글, 읽은 것, 작업 문서</p>
+        </div>
+        <div class="shelf" id="shelf"></div>
+      </div>
     </section>
-
-    <section class="tp-group">
-      <h3 class="tp-group__title">타이포그래피</h3>
-      <div class="tp-row"><label for="tp-font-display">제목 폰트</label>
-        <select id="tp-font-display" data-var="--font-display" data-raw="1">
-          <option value="var(--font-satoshi)">Satoshi / Pretendard</option>
-          <option value="var(--font-inter)">Inter</option>
-          <option value="var(--font-mono)">Mono</option>
-          <option value="Georgia, 'Times New Roman', serif">Serif</option>
-        </select></div>
-      <div class="tp-row"><label for="tp-font-body">본문 폰트</label>
-        <select id="tp-font-body" data-var="--font-body" data-raw="1">
-          <option value="var(--font-inter)">Inter / Pretendard</option>
-          <option value="var(--font-satoshi)">Satoshi</option>
-          <option value="var(--font-mono)">Mono</option>
-          <option value="Georgia, 'Times New Roman', serif">Serif</option>
-        </select></div>
-      <div class="tp-row"><label for="tp-display-scale">제목 크기<span class="tp-row__val" data-val-for="tp-display-scale">1</span></label>
-        <input type="range" id="tp-display-scale" data-var="--display-scale" min="0.7" max="1.4" step="0.05" value="1"></div>
-      <div class="tp-row"><label for="tp-type-scale">본문 크기<span class="tp-row__val" data-val-for="tp-type-scale">1</span></label>
-        <input type="range" id="tp-type-scale" data-var="--type-scale" min="0.85" max="1.25" step="0.05" value="1"></div>
-      <div class="tp-row"><label for="tp-weight-body">본문 굵기<span class="tp-row__val" data-val-for="tp-weight-body">400</span></label>
-        <input type="range" id="tp-weight-body" data-var="--weight-body" min="300" max="600" step="100" value="400"></div>
-      <div class="tp-row"><label for="tp-weight-heading">제목 굵기<span class="tp-row__val" data-val-for="tp-weight-heading">600</span></label>
-        <input type="range" id="tp-weight-heading" data-var="--weight-heading" min="400" max="800" step="100" value="600"></div>
-    </section>
-
-    <section class="tp-group">
-      <h3 class="tp-group__title">레이아웃 · 페이지 길이</h3>
-      <div class="tp-row"><label for="tp-maxw">본문 최대 폭<span class="tp-row__val" data-val-for="tp-maxw">1200px</span></label>
-        <input type="range" id="tp-maxw" data-var="--content-max" data-unit="px" min="880" max="1440" step="20" value="1200"></div>
-      <div class="tp-row"><label for="tp-section-gap">섹션 간격<span class="tp-row__val" data-val-for="tp-section-gap">64px</span></label>
-        <input type="range" id="tp-section-gap" data-var="--section-gap" data-unit="px" min="24" max="160" step="8" value="64"></div>
-      <div class="tp-row"><label for="tp-section-min">섹션 최소 높이<span class="tp-row__val" data-val-for="tp-section-min">0dvh</span></label>
-        <input type="range" id="tp-section-min" data-var="--section-min-height" data-unit="dvh" min="0" max="100" step="5" value="0"></div>
-      <div class="tp-row"><label for="tp-density">밀도<span class="tp-row__val" data-val-for="tp-density">1</span></label>
-        <input type="range" id="tp-density" data-var="--density" min="0.75" max="1.4" step="0.05" value="1"></div>
-      <div class="tp-row"><label for="tp-radius">모서리 라운드<span class="tp-row__val" data-val-for="tp-radius">1</span></label>
-        <input type="range" id="tp-radius" data-var="--radius-scale" min="0" max="2" step="0.1" value="1"></div>
-      <div class="tp-row"><label for="tp-nav">상단바 높이<span class="tp-row__val" data-val-for="tp-nav">56px</span></label>
-        <input type="range" id="tp-nav" data-var="--nav-height" data-unit="px" min="48" max="88" step="4" value="56"></div>
-      <div class="tp-row"><label for="tp-sidebar">사이드 폭<span class="tp-row__val" data-val-for="tp-sidebar">220px</span></label>
-        <input type="range" id="tp-sidebar" data-var="--sidebar-width" data-unit="px" min="140" max="300" step="10" value="220"></div>
-    </section>
-
-    <p class="caption muted tp-note">
-      변경한 값은 <strong>이 브라우저 세션에만</strong> 적용됩니다. 마음에 드는 조합을 찾았으면
-      <strong>CSS 복사</strong>로 코드를 받아 <code class="mono">style.css</code>의 <code class="mono">:root</code>에 붙여넣으세요.
-    </p>
-
   </div>
+</template>
 
-  <footer class="theme-panel__foot">
-    <button class="btn btn--filled btn--sm" type="button" id="btn-export">CSS 복사</button>
-    <button class="btn btn--outline btn--sm" type="button" id="btn-reset">초기화</button>
-  </footer>
-</aside>
-<div class="theme-scrim" id="theme-scrim" hidden=""></div>
-<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+(function () {
+  'use strict';
+  var root = document.documentElement, body = document.body, main = document.getElementById('main');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-<script src="app.js"></script>
+  /* ---------- 데이터 (자리 표시) ---------- */
+  var PROJECTS = [1, 2, 3].map(function (n) { return { id: String(n), name: '프로젝트명 ' + n }; });
+  var INFO = ['프로젝트 기간', '담당 역할', '팀 인원', '출시 여부', '플랫폼'];
+  var STEPS = [
+    { t: '사업 과제와 내 책임', p: '프로젝트가 해결하려던 사업 문제와 본인의 책임 범위' },
+    { t: '판단 근거와 의사결정', p: '검토한 선택지, 제약, 판단 기준과 선택 이유', key: true },
+    { t: '실행과 협업', p: '본인의 실행, 이해관계자와의 조율, 실제 산출물' },
+    { t: '결과와 검증', p: '확인된 결과와 판단 근거. 본인의 제안·결정과 팀 차원의 결정 구분' }
+  ];
+  var LIB = {
+    essay: { name: '개인 글', en: 'Essays' },
+    reading: { name: '독서 기록', en: 'Reading' },
+    work: { name: '개인 작업 문서', en: 'Work notes' }
+  };
+  var DATES = ['2026-11-10', '2026-10-21', '2026-09-03', '2026-07-18'];
+  Object.keys(LIB).forEach(function (k) {
+    LIB[k].items = DATES.map(function (d, i) { return { id: String(i + 1), date: d, title: '예시 기록 ' + (i + 1) }; });
+  });
 
+  /* ---------- 저장소 (이 브라우저에만) ---------- */
+  function sget(k, d) { try { var v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } }
+  function sset(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+  function ssget(k, d) { try { var v = sessionStorage.getItem(k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } }
+  function ssset(k, v) { try { sessionStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+  var edits = sget('pf.edits', {});
 
+  /* ---------- 테마 ---------- */
+  function setTheme(t) {
+    root.setAttribute('data-theme', t); sset('pf.theme', t);
+    document.querySelectorAll('[data-theme-btn]').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.themeBtn === t ? 'true' : 'false'); });
+  }
+  setTheme(sget('pf.theme', 'light'));
+  document.querySelectorAll('[data-theme-btn]').forEach(function (b) { b.addEventListener('click', function () { setTheme(b.dataset.themeBtn); }); });
 
+  /* ---------- 편집 모드 ---------- */
+  var editing = false, editBtn = document.getElementById('editBtn');
+  function applyEdits(scope) {
+    (scope || document).querySelectorAll('[data-sync]').forEach(function (el) {
+      var k = el.dataset.sync; if (edits[k] != null) el.textContent = edits[k];
+    });
+  }
+  function setEditing(on) {
+    editing = on; body.classList.toggle('editing', on); editBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    editBtn.textContent = on ? '편집 완료' : '편집';
+    document.querySelectorAll('[data-edit]').forEach(function (el) { el.contentEditable = on ? 'true' : 'false'; if (on) el.setAttribute('spellcheck', 'false'); });
+    if (!on) { sset('pf.edits', edits); applyEdits(); }
+  }
+  editBtn.addEventListener('click', function () { setEditing(!editing); });
+  document.getElementById('editDone').addEventListener('click', function () { setEditing(false); });
+  document.addEventListener('input', function (e) {
+    var el = e.target.closest && e.target.closest('[data-sync]'); if (!el || !editing) return;
+    edits[el.dataset.sync] = el.textContent.trim();
+    document.querySelectorAll('[data-sync="' + el.dataset.sync + '"]').forEach(function (o) { if (o !== el) o.textContent = el.textContent; });
+  });
+  // 편집 중 링크 이동 정지
+  document.addEventListener('click', function (e) {
+    if (!editing) return;
+    var a = e.target.closest('a, .play'); if (a && !a.closest('.edit-note')) { e.preventDefault(); e.stopPropagation(); }
+  }, true);
+  document.addEventListener('keydown', function (e) {
+    if (editing && e.key === 'Enter' && e.target.isContentEditable) { e.preventDefault(); e.target.blur(); }
+  });
 
+  /* ---------- 모바일 드롭다운 ---------- */
+  var menuBtn = document.getElementById('menuBtn'), dd = document.getElementById('dropdown');
+  function setMenu(open) { dd.classList.toggle('open', open); menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false'); }
+  menuBtn.addEventListener('click', function () { setMenu(!dd.classList.contains('open')); });
+  dd.addEventListener('click', function (e) { if (e.target.closest('a')) setMenu(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && dd.classList.contains('open')) { setMenu(false); menuBtn.focus(); } });
 
-</body></html>
+  /* ---------- 헤더 경계선 ---------- */
+  var header = document.getElementById('header');
+  function onScroll() { header.classList.toggle('scrolled', scrollY > 4); heroScrub(); rememberScroll(); }
+  addEventListener('scroll', onScroll, { passive: true });
+
+  /* ---------- 등장 연출 ---------- */
+  var io = 'IntersectionObserver' in window ? new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
+  }, { rootMargin: '0px 0px -10% 0px' }) : null;
+  function observe(scope) {
+    scope.querySelectorAll('.mask, .fade').forEach(function (el) { if (io && !reduce.matches) io.observe(el); else el.classList.add('is-in'); });
+  }
+
+  /* ---------- 히어로 사진: 둥근 틀이 넓어짐 ---------- */
+  var heroPhoto = null;
+  function heroScrub() {
+    if (!heroPhoto || reduce.matches || innerWidth < 768) return;
+    var q = Math.min(1, Math.max(0, scrollY / (innerHeight * .6)));
+    var e = 1 - Math.pow(1 - q, 3);
+    heroPhoto.style.setProperty('--ci', (6 * (1 - e)).toFixed(2) + '%');
+    heroPhoto.style.setProperty('--cr', (48 - 24 * e).toFixed(1) + 'px');
+    heroPhoto.style.setProperty('--ps', (1.08 - .08 * e).toFixed(4));
+  }
+
+  /* ---------- 화면 그리기 ---------- */
+  function el(tag, cls, html) { var n = document.createElement(tag); if (cls) n.className = cls; if (html != null) n.innerHTML = html; return n; }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function fmt(d) { return d.replace(/-/g, '.'); }
+  var playIcon = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5v11l9-5.5z" fill="currentColor"/></svg>';
+  var pauseIcon = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5h3v11H4zM9 2.5h3v11H9z" fill="currentColor"/></svg>';
+
+  function renderMain() {
+    main.innerHTML = '';
+    main.appendChild(document.getElementById('tpl-main').content.cloneNode(true));
+    var cards = main.querySelector('#cards');
+    PROJECTS.forEach(function (p, i) {
+      var c = el('article', 'card fade');
+      c.style.transitionDelay = (i * 0.08) + 's';
+      c.innerHTML =
+        '<div class="card-media"><div class="ph"><span class="ph-cap">썸네일</span></div>' +
+        '<div class="preview" aria-hidden="true"><span class="mute">음소거</span><span class="ph-cap">플레이 영상 미리보기</span></div></div>' +
+        '<div class="card-body"><h3 class="card-title" data-edit="proj-' + p.id + '" data-sync="proj-' + p.id + '">' + esc(p.name) + '</h3><span class="card-no">0' + p.id + '</span></div>' +
+        '<a class="card-link" href="#/project/' + p.id + '"><span class="sr">' + esc(p.name) + ' 상세 보기</span></a>' +
+        '<button type="button" class="play" aria-label="미리보기 재생" aria-pressed="false">' + playIcon + '</button>';
+      var play = c.querySelector('.play');
+      function setPlay(on) { c.classList.toggle('playing', on); play.setAttribute('aria-pressed', on ? 'true' : 'false'); play.setAttribute('aria-label', on ? '미리보기 정지' : '미리보기 재생'); play.innerHTML = on ? pauseIcon : playIcon; }
+      c.addEventListener('mouseenter', function () { if (matchMedia('(hover: hover)').matches) setPlay(true); });
+      c.addEventListener('mouseleave', function () { if (matchMedia('(hover: hover)').matches) setPlay(false); });
+      play.addEventListener('click', function (e) { e.preventDefault(); e.stopPropagation(); setPlay(!c.classList.contains('playing')); });
+      cards.appendChild(c);
+    });
+    var shelf = main.querySelector('#shelf');
+    Object.keys(LIB).forEach(function (k, i) {
+      var L = LIB[k];
+      var a = el('a', 'cover fade');
+      a.href = '#/lib/' + k; a.style.transitionDelay = (i * 0.08) + 's';
+      a.innerHTML = '<span class="k">' + L.en + '</span><h3>' + L.name + '</h3><span class="n"><span>' + L.items.length + '편</span><span class="arrow" aria-hidden="true">→</span></span>';
+      shelf.appendChild(a);
+    });
+    heroPhoto = main.querySelector('#heroPhoto');
+  }
+
+  function renderAbout() {
+    main.innerHTML = '';
+    var v = el('div', 'view about');
+    v.innerHTML = '<div class="wrap"><div class="col" style="text-align:left"><a class="back" href="#/intro">← 메인으로</a></div>' +
+      '<h1><span class="mask"><span data-edit="about-title" data-sync="about-title">제목 미정</span></span></h1>' +
+      '<div class="portrait fade"><div class="ph"><span class="ph-cap">프로필 사진</span></div></div>' +
+      '<div class="col read fade"><p class="empty">자기소개서 본문 미입력.</p></div></div>';
+    main.appendChild(v); heroPhoto = null;
+  }
+
+  function renderProject(id) {
+    var p = PROJECTS.filter(function (x) { return x.id === id; })[0];
+    if (!p) return renderMain();
+    main.innerHTML = '';
+    var v = el('div', 'view');
+    var info = INFO.map(function (t) { return '<div><dt>' + t + '</dt><dd class="empty" style="color:inherit;opacity:.85">미입력</dd></div>'; }).join('');
+    var steps = STEPS.map(function (s, i) {
+      return '<section class="step' + (s.key ? ' key' : '') + ' fade"><span class="no">0' + (i + 1) + '</span><div><h2>' + s.t + '</h2><p class="purpose">' + s.p + '</p><div class="ph"><span class="ph-cap">내용 미입력</span></div></div></section>';
+    }).join('');
+    var idx = PROJECTS.indexOf(p), next = PROJECTS[(idx + 1) % PROJECTS.length];
+    v.innerHTML =
+      '<header class="p-cover"><div class="ph"><span class="ph-cap">대표 이미지</span></div><div class="wrap">' +
+      '<span class="eyebrow">Project 0' + p.id + '</span>' +
+      '<h1><span class="mask"><span data-edit="proj-' + p.id + '" data-sync="proj-' + p.id + '">' + esc(p.name) + '</span></span></h1>' +
+      '<dl class="p-info">' + info + '</dl></div></header>' +
+      '<div class="wrap"><div class="col steps">' + steps + '</div>' +
+      '<div class="col p-next"><a class="back" href="#/projects">← 프로젝트 목록</a><a class="back" href="#/project/' + next.id + '">다음 프로젝트 →</a></div></div>';
+    main.appendChild(v); heroPhoto = null;
+  }
+
+  function sortedItems(cat) {
+    var order = ssget('pf.sort.' + cat, 'new');
+    var items = LIB[cat].items.slice().sort(function (a, b) { return order === 'new' ? b.date.localeCompare(a.date) : a.date.localeCompare(b.date); });
+    return { order: order, items: items };
+  }
+  function renderList(cat) {
+    var L = LIB[cat]; if (!L) return renderMain();
+    main.innerHTML = '';
+    var v = el('div', 'view'), s = sortedItems(cat);
+    v.innerHTML = '<div class="wrap"><div style="padding-top:40px"><a class="back" href="#/library">← 서재</a></div>' +
+      '<div class="lib-head"><div><span class="eyebrow">' + L.en + '</span><h1>' + L.name + '</h1></div>' +
+      '<div class="sort" role="group" aria-label="정렬"><button type="button" data-o="new">최신순</button><button type="button" data-o="old">오래된순</button></div></div>' +
+      '<div class="rows" id="rows"></div></div>';
+    main.appendChild(v);
+    function draw() {
+      var s2 = sortedItems(cat), rows = v.querySelector('#rows');
+      rows.innerHTML = s2.items.map(function (it) {
+        var key = 'rec-' + cat + '-' + it.id;
+        return '<a href="#/lib/' + cat + '/' + it.id + '"><time datetime="' + it.date + '">' + fmt(it.date) + '</time><span class="tt" data-edit="' + key + '" data-sync="' + key + '">' + esc(it.title) + '</span><span class="arrow" aria-hidden="true">→</span></a>';
+      }).join('');
+      v.querySelectorAll('.sort button').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.o === s2.order ? 'true' : 'false'); });
+      applyEdits(rows); if (editing) setEditing(true);
+    }
+    v.querySelectorAll('.sort button').forEach(function (b) { b.addEventListener('click', function () { ssset('pf.sort.' + cat, b.dataset.o); draw(); }); });
+    draw(); heroPhoto = null;
+  }
+
+  function renderRecord(cat, id) {
+    var L = LIB[cat]; var it = L && L.items.filter(function (x) { return x.id === id; })[0];
+    if (!it) return renderList(cat);
+    main.innerHTML = '';
+    var key = 'rec-' + cat + '-' + it.id;
+    var v = el('article', 'view record');
+    v.innerHTML = '<div class="wrap"><div class="col">' +
+      '<button type="button" class="back" id="toList">← 목록으로</button>' +
+      '<h1 data-edit="' + key + '" data-sync="' + key + '">' + esc(it.title) + '</h1>' +
+      '<time datetime="' + it.date + '">' + fmt(it.date) + ' · ' + L.name + '</time>' +
+      '<div class="read"><p class="empty">본문 미입력.</p></div></div></div>';
+    main.appendChild(v);
+    v.querySelector('#toList').addEventListener('click', function () {
+      if (ssget('pf.cameFromList', '') === cat) history.back(); else location.hash = '#/lib/' + cat;
+    });
+    heroPhoto = null;
+  }
+
+  /* ---------- 라우터 ---------- */
+  var currentRoute = '', restoring = false;
+  function rememberScroll() { if (!restoring && currentRoute) { var m = ssget('pf.scroll', {}); m[currentRoute] = scrollY; ssset('pf.scroll', m); } }
+  function route() {
+    var h = location.hash || '#/';
+    var parts = h.replace(/^#\/?/, '').split('/').filter(Boolean);
+    var prev = currentRoute; currentRoute = h;
+    setMenu(false);
+    var section = null;
+    if (!parts.length || ['intro', 'career', 'projects', 'library'].indexOf(parts[0]) > -1) {
+      if (!main.querySelector('#intro')) renderMain();
+      section = parts[0] || null;
+    } else if (parts[0] === 'about') renderAbout();
+    else if (parts[0] === 'project') renderProject(parts[1]);
+    else if (parts[0] === 'lib' && parts.length === 1) renderMain();
+    else if (parts[0] === 'lib' && parts.length === 2) renderList(parts[1]);
+    else if (parts[0] === 'lib' && parts.length === 3) renderRecord(parts[1], parts[2]);
+    else renderMain();
+
+    // 기록 상세로 들어온 경로 기억 (목록으로 버튼에서 사용)
+    if (parts[0] === 'lib' && parts.length === 3) {
+      var prevParts = prev.replace(/^#\/?/, '').split('/').filter(Boolean);
+      ssset('pf.cameFromList', prevParts[0] === 'lib' && prevParts.length === 2 && prevParts[1] === parts[1] ? parts[1] : '');
+    }
+    applyEdits(); observe(main); if (editing) setEditing(true);
+
+    // 현재 섹션 표시
+    var navKey = section || (parts[0] === 'about' ? 'intro' : parts[0] === 'project' ? 'projects' : parts[0] === 'lib' ? 'library' : 'intro');
+    document.querySelectorAll('.gnb a').forEach(function (a) { if (a.dataset.nav === navKey) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
+
+    // 스크롤 위치: 섹션 → 해당 제목, 목록 복귀 → 저장 위치, 그 외 → 맨 위
+    restoring = true;
+    requestAnimationFrame(function () {
+      var saved = ssget('pf.scroll', {})[h];
+      if (section && section !== 'intro') {
+        var t = document.getElementById(section);
+        if (t) window.scrollTo({ top: t.getBoundingClientRect().top + scrollY - parseInt(getComputedStyle(root).getPropertyValue('--header-h')) - 24 + (section === 'intro' ? 0 : 0), behavior: reduce.matches ? 'auto' : 'smooth' });
+      } else if (section === 'intro') { window.scrollTo(0, 0); }
+      else if (parts[0] === 'lib' && parts.length === 2 && saved != null) { window.scrollTo(0, saved); }
+      else { window.scrollTo(0, 0); }
+      setTimeout(function () { restoring = false; onScroll(); }, 400);
+      if (prev && !section) main.focus({ preventScroll: true });
+    });
+  }
+  // 같은 섹션 링크를 다시 눌러도 이동
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('a[href^="#/"]'); if (!a || editing) return;
+    if (a.getAttribute('href') === location.hash) { e.preventDefault(); route(); }
+  });
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  addEventListener('hashchange', route);
+  route();
+})();
+</script>
+</body>
+</html>
